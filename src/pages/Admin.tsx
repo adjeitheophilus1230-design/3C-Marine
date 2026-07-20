@@ -33,6 +33,8 @@ export default function Admin() {
     | "news"
     | "media"
     | "forms"
+    | "careers"
+    | "testimonials"
     | "seo"
     | "analytics"
     | "users"
@@ -48,6 +50,8 @@ export default function Admin() {
   const [editingService, setEditingService] = useState<any | null>(null);
   const [editingNews, setEditingNews] = useState<any | null>(null);
   const [editingTeam, setEditingTeam] = useState<any | null>(null);
+  const [editingJob, setEditingJob] = useState<any | null>(null);
+  const [editingTestimonial, setEditingTestimonial] = useState<any | null>(null);
 
   // Notifications & Helpers
   const [notification, setNotification] = useState<string | null>(null);
@@ -869,6 +873,212 @@ export default function Admin() {
                   </tbody>
                 </table>
               </div>
+            </div>
+          )}
+
+          {/* ───────────────────────────────────────────────────────────── */}
+          {/* CAREERS MODULE */}
+          {/* ───────────────────────────────────────────────────────────── */}
+          {activeModule === "careers" && (
+            <div className="p-8 rounded-2xl border shadow-sm space-y-6" style={cardBgStyle}>
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h3 className="font-bold text-2xl" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Careers & Vacancies Manager</h3>
+                  <p className="text-xs text-slate-500 font-medium">Post open engineering positions and manage candidate recruitment</p>
+                </div>
+                <button
+                  onClick={() => setEditingJob({
+                    id: Date.now(),
+                    title: "New Engineering Position",
+                    department: "Engineering",
+                    location: "Tema, Ghana",
+                    type: "Full-time",
+                    description: "Position overview..."
+                  })}
+                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-orange-600"
+                  style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}
+                >
+                  + POST NEW VACANCY
+                </button>
+              </div>
+
+              <div className="grid gap-4">
+                {cms.jobs.map((j) => (
+                  <div key={j.id} className="p-5 rounded-xl border flex flex-col md:flex-row md:items-center justify-between gap-4" style={{ borderColor: "#E8EEF3" }}>
+                    <div>
+                      <span className="text-xs font-bold text-orange-600 mr-2">{j.type}</span>
+                      <span className="text-xs text-slate-400">{j.department}</span>
+                      <h4 className="font-bold text-lg" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{j.title}</h4>
+                      <p className="text-xs text-slate-500">📍 {j.location}</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button onClick={() => setEditingJob({ ...j })} className="px-3.5 py-1.5 rounded-lg text-xs font-bold border border-slate-300">EDIT</button>
+                      <button
+                        onClick={() => {
+                          cms.updateJobs(cms.jobs.filter((item) => item.id !== j.id));
+                          notify("Vacancy removed!");
+                        }}
+                        className="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-600"
+                      >
+                        DELETE
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {editingJob && (
+                <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-2xl max-w-xl w-full p-8 text-slate-900">
+                    <h4 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>Edit Vacancy</h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">JOB TITLE</label>
+                        <input type="text" value={editingJob.title} onChange={(e) => setEditingJob({ ...editingJob, title: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">DEPARTMENT</label>
+                          <input type="text" value={editingJob.department} onChange={(e) => setEditingJob({ ...editingJob, department: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">TYPE</label>
+                          <input type="text" value={editingJob.type} onChange={(e) => setEditingJob({ ...editingJob, type: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">LOCATION</label>
+                        <input type="text" value={editingJob.location} onChange={(e) => setEditingJob({ ...editingJob, location: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">DESCRIPTION</label>
+                        <textarea rows={3} value={editingJob.description} onChange={(e) => setEditingJob({ ...editingJob, description: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div className="flex justify-end gap-3 pt-4 border-t">
+                        <button onClick={() => setEditingJob(null)} className="px-5 py-2.5 rounded-lg text-sm text-slate-600">Cancel</button>
+                        <button
+                          onClick={() => {
+                            const existingIndex = cms.jobs.findIndex((item) => item.id === editingJob.id);
+                            if (existingIndex >= 0) {
+                              const updated = [...cms.jobs];
+                              updated[existingIndex] = editingJob;
+                              cms.updateJobs(updated);
+                            } else {
+                              cms.updateJobs([editingJob, ...cms.jobs]);
+                            }
+                            setEditingJob(null);
+                            notify("Vacancy saved!");
+                          }}
+                          className="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-orange-600"
+                          style={{ backgroundColor: "#E85C0D" }}
+                        >
+                          SAVE VACANCY
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ───────────────────────────────────────────────────────────── */}
+          {/* TESTIMONIALS MODULE */}
+          {/* ───────────────────────────────────────────────────────────── */}
+          {activeModule === "testimonials" && (
+            <div className="p-8 rounded-2xl border shadow-sm space-y-6" style={cardBgStyle}>
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h3 className="font-bold text-2xl" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Client Testimonials Manager</h3>
+                  <p className="text-xs text-slate-500 font-medium">Manage executive client quotes, organization logos, and endorsements</p>
+                </div>
+                <button
+                  onClick={() => setEditingTestimonial({
+                    id: Date.now(),
+                    quote: "3C Marine Engineering delivered exceptional technical performance.",
+                    author: "Client Executive",
+                    role: "Operations Director",
+                    company: "Client Organization",
+                    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&auto=format"
+                  })}
+                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-orange-600"
+                  style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}
+                >
+                  + ADD TESTIMONIAL
+                </button>
+              </div>
+
+              <div className="grid gap-4">
+                {cms.testimonials.map((t) => (
+                  <div key={t.id} className="p-5 rounded-xl border flex flex-col md:flex-row md:items-center justify-between gap-4" style={{ borderColor: "#E8EEF3" }}>
+                    <div>
+                      <p className="italic text-sm mb-2">"{t.quote}"</p>
+                      <div className="text-xs font-bold">{t.author} — <span className="text-orange-600">{t.company}</span> ({t.role})</div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button onClick={() => setEditingTestimonial({ ...t })} className="px-3.5 py-1.5 rounded-lg text-xs font-bold border border-slate-300">EDIT</button>
+                      <button
+                        onClick={() => {
+                          cms.updateTestimonials(cms.testimonials.filter((item) => item.id !== t.id));
+                          notify("Testimonial removed!");
+                        }}
+                        className="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-600"
+                      >
+                        DELETE
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {editingTestimonial && (
+                <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-2xl max-w-xl w-full p-8 text-slate-900">
+                    <h4 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>Edit Testimonial</h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">CLIENT QUOTE</label>
+                        <textarea rows={3} value={editingTestimonial.quote} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, quote: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">AUTHOR NAME</label>
+                          <input type="text" value={editingTestimonial.author} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, author: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">COMPANY</label>
+                          <input type="text" value={editingTestimonial.company} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, company: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">ROLE / TITLE</label>
+                        <input type="text" value={editingTestimonial.role} onChange={(e) => setEditingTestimonial({ ...editingTestimonial, role: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div className="flex justify-end gap-3 pt-4 border-t">
+                        <button onClick={() => setEditingTestimonial(null)} className="px-5 py-2.5 rounded-lg text-sm text-slate-600">Cancel</button>
+                        <button
+                          onClick={() => {
+                            const existingIndex = cms.testimonials.findIndex((item) => item.id === editingTestimonial.id);
+                            if (existingIndex >= 0) {
+                              const updated = [...cms.testimonials];
+                              updated[existingIndex] = editingTestimonial;
+                              cms.updateTestimonials(updated);
+                            } else {
+                              cms.updateTestimonials([editingTestimonial, ...cms.testimonials]);
+                            }
+                            setEditingTestimonial(null);
+                            notify("Testimonial saved!");
+                          }}
+                          className="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-orange-600"
+                          style={{ backgroundColor: "#E85C0D" }}
+                        >
+                          SAVE TESTIMONIAL
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
