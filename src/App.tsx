@@ -19,7 +19,7 @@ function AppContent() {
   const isAdmin = location.pathname === "/admin";
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={`min-h-screen flex flex-col ${isAdmin ? "bg-[#060F1C]" : ""}`}>
       {!isAdmin && <Nav />}
       <main className="flex-1">
         <Routes>
