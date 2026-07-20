@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PROJECTS } from "../data/mock";
+import { SearchIcon, MapPinIcon, ClockIcon } from "../components/Icons";
 
 const CATEGORIES = ["All", "Marine", "Offshore", "Fabrication", "Inspection", "Maintenance"];
 
@@ -68,7 +69,9 @@ export default function Projects() {
           <div className="flex flex-col sm:flex-row gap-4 mb-10">
             {/* Search box */}
             <div className="relative flex-1 max-w-md">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm" style={{ color: "#A0B2C1" }}>🔍</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: "#A0B2C1" }}>
+                <SearchIcon size={16} />
+              </span>
               <input
                 type="text"
                 placeholder="Search projects, clients, locations..."
@@ -150,10 +153,16 @@ export default function Projects() {
                     <p className="text-sm leading-relaxed" style={{ color: "#7A90A4" }}>
                       {p.scope.slice(0, 90)}...
                     </p>
-                    <div className="mt-4 flex items-center gap-3">
-                      <span className="text-xs" style={{ color: "#A0B2C1" }}>📍 {p.location}</span>
+                    <div className="mt-4 flex items-center gap-4 text-xs" style={{ color: "#A0B2C1" }}>
+                      <span className="inline-flex items-center gap-1">
+                        <MapPinIcon size={12} color="#E85C0D" />
+                        {p.location}
+                      </span>
                       <span style={{ color: "#C8D5DF" }}>·</span>
-                      <span className="text-xs" style={{ color: "#A0B2C1" }}>⏱ {p.duration}</span>
+                      <span className="inline-flex items-center gap-1">
+                        <ClockIcon size={12} color="#E85C0D" />
+                        {p.duration}
+                      </span>
                     </div>
                   </div>
                 </button>
@@ -161,7 +170,9 @@ export default function Projects() {
             </div>
           ) : (
             <div className="text-center py-20">
-              <div className="text-5xl mb-4">🔍</div>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: "#FFF0E8" }}>
+                <SearchIcon size={28} color="#E85C0D" />
+              </div>
               <h3 className="font-bold text-2xl mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>No Projects Found</h3>
               <p className="text-sm" style={{ color: "#7A90A4" }}>Try a different search term or category filter.</p>
               <button onClick={() => { setSearch(""); setActive("All"); }} className="mt-4 text-sm font-semibold" style={{ color: "#E85C0D" }}>

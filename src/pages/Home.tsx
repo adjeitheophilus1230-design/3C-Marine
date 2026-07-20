@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { STATS, SERVICES, PROJECTS, NEWS, TESTIMONIALS } from "../data/mock";
 import PartnerLogos from "../components/PartnerLogos";
+import { SERVICE_ICONS, ShieldIcon, LeafIcon, BadgeCheckIcon } from "../components/Icons";
 
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
@@ -332,7 +333,9 @@ export default function Home() {
                   </div>
                   <div className="p-6">
                     <div className="flex items-start gap-3 mb-3">
-                      <span className="text-xl">{s.icon}</span>
+                      <span className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0 mt-0.5" style={{ backgroundColor: "#FFF0E8" }}>
+                        {(() => { const Icon = SERVICE_ICONS[s.icon]; return Icon ? <Icon size={18} color="#E85C0D" /> : null; })()}
+                      </span>
                       <h3
                         className="font-bold text-xl"
                         style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}
@@ -476,22 +479,24 @@ export default function Home() {
               {
                 title: "HSE Commitment",
                 body: "Every project begins and ends with safety. Our HSE management system meets ISO 45001:2018 standards and is enforced on every site, every day.",
-                icon: "🛡️",
+                Icon: ShieldIcon,
               },
               {
                 title: "Environmental Responsibility",
                 body: "We are committed to minimising our environmental footprint across all operations — from waste management to spill prevention and marine ecosystem protection.",
-                icon: "🌿",
+                Icon: LeafIcon,
               },
               {
                 title: "Quality Assurance",
                 body: "ISO 9001:2015 certified quality management system ensures every deliverable meets or exceeds client and regulatory requirements.",
-                icon: "✅",
+                Icon: BadgeCheckIcon,
               },
             ].map((item, i) => (
               <FadeIn key={item.title} delay={i * 100}>
                 <div className="rounded-lg p-8" style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div className="text-3xl mb-4">{item.icon}</div>
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(232,92,13,0.15)" }}>
+                    <item.Icon size={20} color="#E85C0D" />
+                  </div>
                   <h3
                     className="text-white font-bold mb-3 text-xl"
                     style={{ fontFamily: "'Barlow Condensed', sans-serif" }}

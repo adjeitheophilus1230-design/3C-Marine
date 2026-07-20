@@ -177,11 +177,8 @@ export default function News() {
               </h2>
               <p className="leading-relaxed text-lg mb-4" style={{ color: "#5B6E82" }}>{selected.excerpt}</p>
               <p className="text-sm leading-relaxed" style={{ color: "#7A90A4" }}>
-                This article is part of our ongoing series of industry insights and company updates. The full article will be available upon site launch with official client content.
+                3C Marine Engineering Limited continues to push the boundaries of technical excellence across West Africa. For further details on this update or to speak with our media communications team, please contact our head office in Tema.
               </p>
-              <div className="mt-6 px-4 py-3 rounded-lg text-xs" style={{ backgroundColor: "#F4F7F9", color: "#A0B2C1", border: "1px solid #E8EEF3" }}>
-                ✏️ <em>Sample content — replace with official 3C Marine Engineering article content.</em>
-              </div>
             </div>
           </div>
         </div>

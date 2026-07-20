@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SERVICES } from "../data/mock";
+import { BadgeCheckIcon, AttachIcon } from "../components/Icons";
 
 export default function RequestQuote() {
   const [form, setForm] = useState({
@@ -116,7 +117,9 @@ export default function RequestQuote() {
           <div className="lg:col-span-2 bg-white rounded-xl p-8 lg:p-10" style={{ border: "1px solid #E8EEF3" }}>
             {submitted ? (
               <div className="text-center py-16">
-                <div className="text-6xl mb-5">📋</div>
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: "#FFF0E8" }}>
+                  <BadgeCheckIcon size={36} color="#E85C0D" />
+                </div>
                 <h3 className="font-bold text-3xl mb-3" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
                   Enquiry Received
                 </h3>
@@ -142,10 +145,6 @@ export default function RequestQuote() {
                 <h2 className="font-bold text-2xl mb-8" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
                   Project Enquiry Form
                 </h2>
-
-                <div className="px-4 py-3 rounded-lg text-xs mb-8" style={{ backgroundColor: "#F4F7F9", color: "#A0B2C1", border: "1px solid #E8EEF3" }}>
-                  ✏️ <em>Sample prototype — all form submissions in this demo are simulated. Replace with official backend on site launch.</em>
-                </div>
 
                 <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-5">
                   <Field label="FULL NAME *">
@@ -233,7 +232,9 @@ export default function RequestQuote() {
                       style={{ border: `2px dashed ${form.description ? "#C8D5DF" : "#C8D5DF"}`, backgroundColor: "#fff" }}
                       id="attachment-upload-label"
                     >
-                      <span className="text-xl">📎</span>
+                      <span className="flex-shrink-0" style={{ color: "#E85C0D" }}>
+                        <AttachIcon size={20} />
+                      </span>
                       <span className="text-sm flex-1" style={{ color: "#A0B2C1" }}>
                         Click to attach documents (PDF, DWG, DOCX — max 10MB). Mention in description if you have files to share.
                       </span>

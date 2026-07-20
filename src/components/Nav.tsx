@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { MapPinIcon, PhoneIcon, EnvelopeIcon } from "./Icons";
 
 const NAV_LINKS = [
   { label: "About", to: "/about" },
@@ -50,15 +51,20 @@ export default function Nav() {
               <strong className="text-white font-medium">Tema Port Base:</strong> Active 24/7 Operations
             </span>
             <span className="hidden lg:inline text-steel-400">|</span>
-            <span className="hidden lg:inline">📍 Tema Harbour Industrial Area, Ghana</span>
+            <span className="hidden lg:inline-flex items-center gap-1.5">
+              <MapPinIcon size={13} color="#E85C0D" />
+              Tema Harbour Industrial Area, Ghana
+            </span>
           </div>
           <div className="flex items-center gap-5">
-            <a href="tel:+233200003C3C" className="hover:text-orange-400 transition-colors flex items-center gap-1 font-medium">
-              📞 24/7 Emergency Response: +233 (0) 30 290 8899
+            <a href="tel:+233302958400" className="hover:text-orange-400 transition-colors flex items-center gap-1.5 font-medium">
+              <PhoneIcon size={13} color="#E85C0D" />
+              24/7 Emergency Response: +233 (0) 30 290 8899
             </a>
             <span className="text-steel-400">|</span>
-            <a href="mailto:info@3cmarineengineering.com" className="hover:text-orange-400 transition-colors">
-              ✉️ info@3cmarineengineering.com
+            <a href="mailto:info@3cmarineengineering.com" className="hover:text-orange-400 transition-colors flex items-center gap-1.5">
+              <EnvelopeIcon size={13} color="#E85C0D" />
+              info@3cmarineengineering.com
             </a>
           </div>
         </div>

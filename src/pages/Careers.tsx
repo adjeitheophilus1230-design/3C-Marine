@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { JOBS } from "../data/mock";
+import { GlobeIcon, TrendingUpIcon, GraduationCapIcon, ShieldIcon, BadgeCheckIcon, MapPinIcon } from "../components/Icons";
 
 function SectionLabel({ children }: { children: string }) {
   return (
@@ -61,13 +62,15 @@ export default function Careers() {
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: "🌍", title: "International Projects", body: "Work on complex engineering projects for global oil companies, port authorities, and maritime operators." },
-              { icon: "📈", title: "Career Development", body: "Structured training programmes, mentorship, and clear progression pathways for all disciplines." },
-              { icon: "🎓", title: "Graduate Programme", body: "A dedicated two-year graduate development programme placing engineers across all service lines." },
-              { icon: "🛡️", title: "Safety-First Culture", body: "Work in an environment where your safety is the number one priority — always." },
+              { Icon: GlobeIcon, title: "International Projects", body: "Work on complex engineering projects for global oil companies, port authorities, and maritime operators." },
+              { Icon: TrendingUpIcon, title: "Career Development", body: "Structured training programmes, mentorship, and clear progression pathways for all disciplines." },
+              { Icon: GraduationCapIcon, title: "Graduate Programme", body: "A dedicated two-year graduate development programme placing engineers across all service lines." },
+              { Icon: ShieldIcon, title: "Safety-First Culture", body: "Work in an environment where your safety is the number one priority — always." },
             ].map((item) => (
               <div key={item.title} className="rounded-lg p-6" style={{ backgroundColor: "#F4F7F9", border: "1px solid #E8EEF3" }}>
-                <div className="text-3xl mb-4">{item.icon}</div>
+                <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "#FFF0E8" }}>
+                  <item.Icon size={22} color="#E85C0D" />
+                </div>
                 <h3 className="font-bold mb-2 text-xl" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
                   {item.title}
                 </h3>
@@ -106,7 +109,10 @@ export default function Careers() {
                   <h3 className="font-bold text-xl mb-1" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
                     {job.title}
                   </h3>
-                  <p className="text-sm mb-2" style={{ color: "#A0B2C1" }}>📍 {job.location}</p>
+                  <p className="text-sm mb-2 flex items-center gap-1.5" style={{ color: "#A0B2C1" }}>
+                    <MapPinIcon size={13} color="#E85C0D" />
+                    {job.location}
+                  </p>
                   <p className="text-sm" style={{ color: "#7A90A4" }}>{job.description}</p>
                 </div>
                 <button
@@ -183,14 +189,19 @@ export default function Careers() {
                   <h2 className="font-bold text-2xl" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
                     {applyJob.title}
                   </h2>
-                  <p className="text-sm mt-1" style={{ color: "#A0B2C1" }}>📍 {applyJob.location}</p>
+                  <p className="text-sm mt-1 flex items-center gap-1.5" style={{ color: "#A0B2C1" }}>
+                    <MapPinIcon size={13} color="#E85C0D" />
+                    {applyJob.location}
+                  </p>
                 </div>
                 <button onClick={() => setApplyJob(null)} className="text-xl text-steel-400" style={{ color: "#A0B2C1" }}>×</button>
               </div>
 
               {submitted ? (
                 <div className="text-center py-8">
-                  <div className="text-5xl mb-4">✅</div>
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: "#FFF0E8" }}>
+                    <BadgeCheckIcon size={32} color="#E85C0D" />
+                  </div>
                   <h3 className="font-bold text-xl mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>Application Submitted</h3>
                   <p className="text-sm" style={{ color: "#7A90A4" }}>Thank you for your interest. Our HR team will review your application and be in touch within 5 working days.</p>
                 </div>

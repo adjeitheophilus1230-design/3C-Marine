@@ -27,7 +27,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=500&fit=crop&auto=format",
-    icon: "⚓",
+    icon: "anchor",
   },
   {
     id: "offshore-engineering",
@@ -50,7 +50,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=500&fit=crop&auto=format",
-    icon: "🛢️",
+    icon: "offshore",
   },
   {
     id: "onshore-engineering",
@@ -73,7 +73,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=800&h=500&fit=crop&auto=format",
-    icon: "🏭",
+    icon: "factory",
   },
   {
     id: "fabrication",
@@ -96,7 +96,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&h=500&fit=crop&auto=format",
-    icon: "🔧",
+    icon: "wrench",
   },
   {
     id: "installation",
@@ -119,7 +119,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=500&fit=crop&auto=format",
-    icon: "🏗️",
+    icon: "crane",
   },
   {
     id: "inspection",
@@ -142,7 +142,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=500&fit=crop&auto=format",
-    icon: "🔍",
+    icon: "search",
   },
   {
     id: "maintenance",
@@ -165,7 +165,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop&auto=format",
-    icon: "⚙️",
+    icon: "cog",
   },
   {
     id: "consultancy",
@@ -188,7 +188,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=500&fit=crop&auto=format",
-    icon: "📋",
+    icon: "clipboard",
   },
   {
     id: "marine-logistics",
@@ -211,7 +211,7 @@ export const SERVICES = [
       "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format",
     ],
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop&auto=format",
-    icon: "🚢",
+    icon: "ship",
   },
 ];
 

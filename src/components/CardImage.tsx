@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { AnchorIcon } from "./Icons";
 
 interface CardImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallbackSrc?: string;
   containerClassName?: string;
-  iconFallback?: string;
 }
 
 export default function CardImage({
@@ -12,7 +12,6 @@ export default function CardImage({
   className = "w-full h-full object-cover",
   fallbackSrc = "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=500&fit=crop&auto=format",
   containerClassName = "",
-  iconFallback = "⚓",
   ...props
 }: CardImageProps) {
   const [hasError, setHasError] = useState(false);
@@ -22,7 +21,7 @@ export default function CardImage({
     <div className={`relative overflow-hidden bg-navy-900 ${containerClassName}`}>
       {!isLoaded && !hasError && (
         <div className="absolute inset-0 bg-navy-800 animate-pulse flex items-center justify-center text-steel-400">
-          <span className="text-2xl">{iconFallback}</span>
+          <AnchorIcon size={24} color="#E85C0D" />
         </div>
       )}
       <img

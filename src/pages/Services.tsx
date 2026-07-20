@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SERVICES } from "../data/mock";
+import { SERVICE_ICONS, SearchIcon } from "../components/Icons";
 
 function SectionLabel({ children }: { children: string }) {
   return (
@@ -80,7 +81,9 @@ export default function Services() {
                       borderLeft: activeService.id === s.id ? "3px solid #E85C0D" : "3px solid transparent",
                     }}
                   >
-                    <span>{s.icon}</span>
+                    <span className="flex-shrink-0" style={{ color: activeService.id === s.id ? "#E85C0D" : "#A0B2C1" }}>
+                      {(() => { const Icon = SERVICE_ICONS[s.icon]; return Icon ? <Icon size={18} /> : null; })()}
+                    </span>
                     {s.title}
                   </button>
                 ))}
@@ -102,8 +105,10 @@ export default function Services() {
                   />
                 </div>
 
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">{activeService.icon}</span>
+                <div className="flex items-center gap-4 mb-2">
+                  <span className="flex items-center justify-center w-12 h-12 rounded-lg flex-shrink-0" style={{ backgroundColor: "#FFF0E8" }}>
+                    {(() => { const Icon = SERVICE_ICONS[activeService.icon]; return Icon ? <Icon size={22} color="#E85C0D" /> : null; })()}
+                  </span>
                   <h2
                     style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "36px", fontWeight: 700, color: "#0C1E35" }}
                   >
@@ -188,8 +193,8 @@ export default function Services() {
                             alt={`${activeService.title} gallery ${idx + 1}`}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ backgroundColor: "rgba(12,30,53,0.5)" }}>
-                            <span className="text-white text-2xl">🔍</span>
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ backgroundColor: "rgba(12,30,53,0.6)" }}>
+                            <SearchIcon size={20} color="#fff" />
                           </div>
                         </button>
                       ))}

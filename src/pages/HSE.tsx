@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CERTIFICATIONS } from "../data/mock";
+import { ShieldIcon, LeafIcon, BadgeCheckIcon } from "../components/Icons";
 
 function SectionLabel({ children }: { children: string }) {
   return (
@@ -110,7 +111,7 @@ export default function HSE() {
           <div className="grid sm:grid-cols-3 gap-8">
             {[
               {
-                icon: "🛡️",
+                Icon: ShieldIcon,
                 title: "Health & Safety",
                 points: [
                   "ISO 45001:2018 certified OHS system",
@@ -121,7 +122,7 @@ export default function HSE() {
                 ],
               },
               {
-                icon: "🌿",
+                Icon: LeafIcon,
                 title: "Environmental Responsibility",
                 points: [
                   "ISO 14001:2015 certified EMS",
@@ -132,7 +133,7 @@ export default function HSE() {
                 ],
               },
               {
-                icon: "✅",
+                Icon: BadgeCheckIcon,
                 title: "Quality Management",
                 points: [
                   "ISO 9001:2015 certified QMS",
@@ -144,7 +145,9 @@ export default function HSE() {
               },
             ].map((pillar) => (
               <div key={pillar.title} className="rounded-lg p-8 bg-white" style={{ border: "1px solid #E8EEF3" }}>
-                <div className="text-4xl mb-5">{pillar.icon}</div>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ backgroundColor: "#FFF0E8" }}>
+                  <pillar.Icon size={24} color="#E85C0D" />
+                </div>
                 <h3 className="font-bold mb-5 text-2xl" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
                   {pillar.title}
                 </h3>

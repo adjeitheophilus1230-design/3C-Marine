@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MapPinIcon, PhoneIcon, EnvelopeIcon, ChatIcon, ClockIcon, BadgeCheckIcon, UploadIcon } from "../components/Icons";
 
 function SectionLabel({ children }: { children: string }) {
   return (
@@ -48,33 +49,34 @@ export default function Contact() {
             {[
               {
                 label: "Head Office",
-                icon: "📍",
+                Icon: MapPinIcon,
                 lines: ["Plot 14, Marine Drive", "Tema Industrial Area", "Tema, Greater Accra", "Ghana"],
               },
               {
                 label: "Phone",
-                icon: "📞",
+                Icon: PhoneIcon,
                 lines: ["+233 30 295 8400", "+233 20 811 4222"],
               },
               {
                 label: "Email",
-                icon: "✉️",
+                Icon: EnvelopeIcon,
                 lines: ["info@3cmarineengineering.com", "projects@3cmarineengineering.com"],
               },
               {
                 label: "WhatsApp",
-                icon: "💬",
+                Icon: ChatIcon,
                 lines: ["+233 20 811 4222"],
               },
               {
                 label: "Office Hours",
-                icon: "⏰",
+                Icon: ClockIcon,
                 lines: ["Mon–Fri: 08:00–17:00 GMT", "Emergency: 24/7 on-call"],
               },
             ].map((item) => (
               <div key={item.label} className="mb-7">
-                <p className="text-xs font-semibold mb-2" style={{ color: "#E85C0D", letterSpacing: "0.1em", fontFamily: "'Barlow Condensed', sans-serif" }}>
-                  {item.icon} {item.label.toUpperCase()}
+                <p className="flex items-center gap-2 text-xs font-semibold mb-2" style={{ color: "#E85C0D", letterSpacing: "0.1em", fontFamily: "'Barlow Condensed', sans-serif" }}>
+                  <item.Icon size={14} color="#E85C0D" />
+                  {item.label.toUpperCase()}
                 </p>
                 {item.lines.map((line) => (
                   <p key={line} className="text-sm" style={{ color: "#5B6E82" }}>{line}</p>
@@ -96,7 +98,9 @@ export default function Contact() {
                   className="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-80"
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ backgroundColor: "rgba(12,30,53,0.45)" }}>
-                  <div className="text-2xl mb-1">📍</div>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center mb-1" style={{ backgroundColor: "rgba(232,92,13,0.9)" }}>
+                    <MapPinIcon size={20} color="#fff" />
+                  </div>
                   <p className="text-white font-semibold text-sm" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Tema Industrial Area, Ghana</p>
                   <p className="text-xs text-white/70 mt-1">Click to open in Google Maps</p>
                 </div>
@@ -108,7 +112,9 @@ export default function Contact() {
           <div className="lg:col-span-2 bg-white rounded-xl p-8 lg:p-10" style={{ border: "1px solid #E8EEF3" }}>
             {submitted ? (
               <div className="text-center py-16">
-                <div className="text-6xl mb-5">✅</div>
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: "#FFF0E8" }}>
+                  <BadgeCheckIcon size={36} color="#E85C0D" />
+                </div>
                 <h3 className="font-bold text-3xl mb-3" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
                   Message Received
                 </h3>
