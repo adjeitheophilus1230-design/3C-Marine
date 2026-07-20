@@ -116,27 +116,43 @@ export default function Admin() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-[85vh] flex items-center justify-center py-16 px-6 relative overflow-hidden" style={{ backgroundColor: "#060F1C" }}>
-        {/* Marine Engineering Background Image & Overlay */}
+      <div className="fixed inset-0 z-50 flex flex-col justify-between p-6 sm:p-10 overflow-y-auto relative" style={{ backgroundColor: "#060F1C" }}>
+        {/* Marine Engineering Background Image & Dark Navy Radial Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&h=1080&fit=crop&auto=format"
             alt="3C Marine Engineering Offshore Operations"
-            className="w-full h-full object-cover opacity-40 scale-105"
-            style={{ filter: "brightness(0.5) contrast(1.2)" }}
+            className="w-full h-full object-cover opacity-35 scale-105"
+            style={{ filter: "brightness(0.4) contrast(1.2)" }}
           />
           <div
             className="absolute inset-0"
             style={{
-              background: "radial-gradient(circle at center, rgba(6,15,28,0.65) 0%, rgba(6,15,28,0.92) 100%)",
+              background: "radial-gradient(circle at center, rgba(6,15,28,0.7) 0%, rgba(6,15,28,0.96) 100%)",
             }}
           />
         </div>
 
-        {/* Centered Login Card */}
-        <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-md rounded-2xl p-10 shadow-2xl border border-white/30 my-auto">
+        {/* Top Header Bar */}
+        <header className="relative z-10 flex items-center justify-between max-w-7xl w-full mx-auto">
+          <a href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-lg shadow-lg" style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}>
+              3C
+            </div>
+            <div>
+              <div className="font-bold text-white text-lg leading-tight tracking-wider" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>3C MARINE ENGINEERING</div>
+              <div className="text-[10px] text-slate-400 font-semibold tracking-widest uppercase">Limited · Tema, Ghana</div>
+            </div>
+          </a>
+          <a href="/" className="text-xs font-bold text-slate-300 hover:text-white px-4 py-2.5 rounded-lg bg-white/10 backdrop-blur-md border border-white/15 transition-all flex items-center gap-1.5" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.05em" }}>
+            ← RETURN TO WEBSITE
+          </a>
+        </header>
+
+        {/* Perfectly Centered Login Card */}
+        <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-md rounded-2xl p-10 shadow-2xl border border-white/30 mx-auto my-auto">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-white text-xl" style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}>
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-white text-xl shadow-md" style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}>
               3C
             </div>
             <div>
@@ -178,6 +194,11 @@ export default function Admin() {
           </form>
           <p className="text-center text-xs text-slate-400 mt-6">Enterprise Portal v3.4 · Auth SSO Ready</p>
         </div>
+
+        {/* Bottom Copyright Notice */}
+        <footer className="relative z-10 text-center text-xs text-slate-400">
+          © {new Date().getFullYear()} 3C Marine Engineering Limited. All rights reserved. Executive Management Platform.
+        </footer>
       </div>
     );
   }
