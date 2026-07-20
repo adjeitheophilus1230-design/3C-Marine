@@ -82,16 +82,25 @@ export default function Contact() {
               </div>
             ))}
 
-            {/* Map placeholder */}
-            <div
-              className="mt-8 rounded-lg overflow-hidden flex items-center justify-center"
-              style={{ height: "200px", backgroundColor: "#1C354F" }}
-            >
-              <div className="text-center p-6">
-                <div className="text-4xl mb-2">🗺️</div>
-                <p className="text-sm text-white/60">Interactive map will be embedded on site launch</p>
-                <p className="text-xs mt-1" style={{ color: "#E85C0D" }}>Tema Industrial Area, Ghana</p>
-              </div>
+            {/* Map embed */}
+            <div className="mt-8 rounded-lg overflow-hidden" style={{ height: "200px" }}>
+              <a
+                href="https://maps.google.com/?q=Tema+Industrial+Area,+Ghana"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full h-full relative group"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&h=300&fit=crop&auto=format"
+                  alt="Tema Port Industrial Area — click to open in Google Maps"
+                  className="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-80"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ backgroundColor: "rgba(12,30,53,0.45)" }}>
+                  <div className="text-2xl mb-1">📍</div>
+                  <p className="text-white font-semibold text-sm" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Tema Industrial Area, Ghana</p>
+                  <p className="text-xs text-white/70 mt-1">Click to open in Google Maps</p>
+                </div>
+              </a>
             </div>
           </div>
 

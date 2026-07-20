@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { STATS, SERVICES, PROJECTS, NEWS } from "../data/mock";
+import { STATS, SERVICES, PROJECTS, NEWS, TESTIMONIALS } from "../data/mock";
+import PartnerLogos from "../components/PartnerLogos";
 
 function useFadeIn() {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,6 +31,39 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
       }}
     >
       {children}
+    </div>
+  );
+}
+
+function AnimatedCounter({ target, suffix, duration = 1600 }: { target: number; suffix: string; duration?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setStarted(true); obs.disconnect(); } },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!started) return;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    const interval = setInterval(() => {
+      current += increment;
+      if (current >= target) { setCount(target); clearInterval(interval); }
+      else setCount(Math.floor(current));
+    }, duration / steps);
+    return () => clearInterval(interval);
+  }, [started, target, duration]);
+  return (
+    <div ref={ref} className="font-bold" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "clamp(40px, 5vw, 64px)", color: "#E85C0D", lineHeight: 1 }}>
+      {count}{suffix}
     </div>
   );
 }
@@ -74,18 +108,15 @@ export default function Home() {
           style={{ background: "linear-gradient(to bottom right, transparent 49.5%, #ffffff 50%)" }}
         />
 
-        <div className="relative max-w-screen-xl mx-auto px-6 lg:px-10 w-full">
-          {/* Overline */}
-          <div
-            className="flex items-center gap-3 mb-6"
-            style={{ opacity: 1 }}
-          >
-            <div className="w-10 h-px" style={{ backgroundColor: "#E85C0D" }} />
+        <div className="relative max-w-screen-xl mx-auto px-6 lg:px-10 w-full pt-32 lg:pt-40">
+          {/* Overline Badge */}
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
+            <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
             <span
-              className="text-xs font-semibold tracking-widest uppercase"
-              style={{ color: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.18em" }}
+              className="text-xs font-bold tracking-widest uppercase text-white"
+              style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.18em" }}
             >
-              Marine · Offshore · Industrial Engineering
+              ISO 9001:2015 & ISO 45001 CERTIFIED · TEMA PORT BASE
             </span>
           </div>
 
@@ -93,31 +124,39 @@ export default function Home() {
             className="text-white mb-6 max-w-4xl"
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
-              fontSize: "clamp(42px, 7vw, 88px)",
+              fontSize: "clamp(44px, 7.5vw, 88px)",
               fontWeight: 800,
-              lineHeight: 1.0,
+              lineHeight: 0.98,
               letterSpacing: "0.01em",
             }}
           >
-            Engineering Solutions Built For Marine, Offshore And Industrial Excellence
+            Engineering Solutions Built For <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-amber-300">Marine, Offshore</span> & Industrial Excellence
           </h1>
 
           <p
-            className="mb-10 max-w-xl"
+            className="mb-8 max-w-2xl text-steel-200"
             style={{
-              color: "rgba(255,255,255,0.7)",
               fontFamily: "'Barlow', sans-serif",
-              fontSize: "18px",
+              fontSize: "19px",
               lineHeight: 1.6,
             }}
           >
-            Delivering reliable engineering solutions through innovation, safety and technical expertise across West Africa and beyond.
+            Delivering high-specification marine, deepwater offshore, and industrial fabrication engineering across West Africa through technical rigour, safety leadership, and international compliance.
           </p>
+
+          {/* Quick Capability Tags */}
+          <div className="flex flex-wrap gap-2 mb-10">
+            {["Subsea Structural Repair", "FPSO Turret Overhaul", "Heavy Lift Installation", "Class Renewal Inspection", "ASME Steel Fabrication"].map((tag) => (
+              <span key={tag} className="text-xs font-semibold px-3 py-1.5 rounded-md bg-navy-800/80 text-steel-200 border border-white/10" style={{ letterSpacing: "0.04em" }}>
+                ✓ {tag}
+              </span>
+            ))}
+          </div>
 
           <div className="flex flex-wrap gap-4">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 font-semibold py-4 px-8 rounded transition-all duration-200 hover:opacity-90"
+              className="inline-flex items-center gap-2 font-semibold py-4 px-8 rounded shadow-lg transition-all duration-200 hover:bg-orange-600 hover:shadow-orange-500/20"
               style={{
                 backgroundColor: "#E85C0D",
                 color: "#fff",
@@ -126,11 +165,11 @@ export default function Home() {
                 fontSize: "16px",
               }}
             >
-              REQUEST CONSULTATION
+              REQUEST CONSULTATION →
             </Link>
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 font-semibold py-4 px-8 rounded transition-all duration-200"
+              className="inline-flex items-center gap-2 font-semibold py-4 px-8 rounded transition-all duration-200 hover:bg-white/20"
               style={{
                 backgroundColor: "rgba(255,255,255,0.1)",
                 color: "#fff",
@@ -140,7 +179,7 @@ export default function Home() {
                 border: "1px solid rgba(255,255,255,0.25)",
               }}
             >
-              EXPLORE PROJECTS
+              EXPLORE PORTFOLIO
             </Link>
           </div>
         </div>
@@ -152,19 +191,9 @@ export default function Home() {
           {STATS.map((s, i) => (
             <FadeIn key={s.label} delay={i * 80}>
               <div className="lg:px-10 text-center lg:text-left">
+                <AnimatedCounter target={s.value} suffix={s.suffix} />
                 <div
-                  className="font-bold mb-1"
-                  style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: "clamp(40px, 5vw, 64px)",
-                    color: "#E85C0D",
-                    lineHeight: 1,
-                  }}
-                >
-                  {s.value}
-                </div>
-                <div
-                  className="text-sm font-medium tracking-wide"
+                  className="text-sm font-medium tracking-wide mt-1"
                   style={{ color: "rgba(255,255,255,0.5)", letterSpacing: "0.05em" }}
                 >
                   {s.label}
@@ -495,35 +524,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── CLIENTS / TRUST ─────────────────────────────────────────── */}
-      <section className="py-20" style={{ backgroundColor: "#F4F7F9" }}>
+      {/* ─── TESTIMONIALS ────────────────────────────────────────────── */}
+      <section className="py-24 lg:py-32" style={{ backgroundColor: "#F4F7F9" }}>
         <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
           <FadeIn>
-            <p
-              className="text-center text-sm font-semibold mb-10 tracking-widest"
-              style={{ color: "#5B6E82", letterSpacing: "0.16em", fontFamily: "'Barlow Condensed', sans-serif" }}
-            >
-              TRUSTED BY LEADING ORGANISATIONS
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px" style={{ backgroundColor: "#C8D5DF" }}>
-              {PARTNER_NAMES.map((name) => (
-                <div
-                  key={name}
-                  className="flex items-center justify-center p-6 text-center text-xs font-semibold"
-                  style={{
-                    backgroundColor: "#F4F7F9",
-                    color: "#5B6E82",
-                    letterSpacing: "0.04em",
-                    minHeight: "80px",
-                  }}
-                >
-                  {name}
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-px" style={{ backgroundColor: "#E85C0D" }} />
+                  <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.16em" }}>
+                    Client Voices
+                  </span>
                 </div>
-              ))}
+                <h2 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: "#0C1E35", lineHeight: 1.05 }}>
+                  What Our Clients Say
+                </h2>
+              </div>
             </div>
           </FadeIn>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <FadeIn key={t.id} delay={i * 100}>
+                <div className="flex flex-col h-full rounded-xl p-8 bg-white" style={{ border: "1px solid #E8EEF3", boxShadow: "0 2px 16px rgba(12,30,53,0.06)" }}>
+                  <div className="text-3xl mb-5" style={{ color: "#E85C0D", fontFamily: "Georgia, serif", lineHeight: 1 }}>"</div>
+                  <p className="flex-1 leading-relaxed mb-6 text-base italic" style={{ color: "#5B6E82" }}>
+                    {t.quote}
+                  </p>
+                  <div className="flex items-center gap-4 pt-5" style={{ borderTop: "1px solid #E8EEF3" }}>
+                    <img src={t.image} alt={t.author} className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
+                    <div>
+                      <div className="font-bold text-sm" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35", fontSize: "16px" }}>{t.author}</div>
+                      <div className="text-xs" style={{ color: "#A0B2C1" }}>{t.role}</div>
+                      <div className="text-xs font-semibold mt-0.5" style={{ color: "#E85C0D" }}>{t.company}</div>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* ─── CLIENTS / TRUST ─────────────────────────────────────────── */}
+      <PartnerLogos />
 
       {/* ─── NEWS ────────────────────────────────────────────────────── */}
       <section className="py-24 lg:py-32" style={{ backgroundColor: "#fff" }}>

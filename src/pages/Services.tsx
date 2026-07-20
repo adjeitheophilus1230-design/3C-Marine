@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SERVICES } from "../data/mock";
 
-function SectionLabel({ children, light = false }: { children: string; light?: boolean }) {
+function SectionLabel({ children }: { children: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
       <div className="w-8 h-px" style={{ backgroundColor: "#E85C0D" }} />
@@ -18,6 +18,11 @@ function SectionLabel({ children, light = false }: { children: string; light?: b
 
 export default function Services() {
   const [activeService, setActiveService] = useState(SERVICES[0]);
+  const [galleryImg, setGalleryImg] = useState<string | null>(null);
+
+  const handleServiceChange = (s: typeof SERVICES[0]) => {
+    setActiveService(s);
+  };
 
   return (
     <div>
@@ -27,7 +32,7 @@ export default function Services() {
         style={{ backgroundColor: "#0C1E35", minHeight: "460px" }}
       >
         <img
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&h=700&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=1600&h=700&fit=crop&auto=format"
           alt="Engineering services"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.2 }}
@@ -63,7 +68,7 @@ export default function Services() {
                 {SERVICES.map((s) => (
                   <button
                     key={s.id}
-                    onClick={() => setActiveService(s)}
+                    onClick={() => handleServiceChange(s)}
                     className="flex items-center gap-3 text-left px-4 py-3 rounded transition-all duration-150"
                     style={{
                       backgroundColor: activeService.id === s.id ? "#0C1E35" : "transparent",
@@ -85,9 +90,10 @@ export default function Services() {
             {/* Detail panel */}
             <div className="lg:col-span-2">
               <div key={activeService.id}>
+                {/* Hero image */}
                 <div
                   className="rounded-lg overflow-hidden mb-8"
-                  style={{ height: "320px", backgroundColor: "#1C354F" }}
+                  style={{ height: "300px", backgroundColor: "#1C354F" }}
                 >
                   <img
                     src={activeService.image}
@@ -109,6 +115,7 @@ export default function Services() {
                   {activeService.description}
                 </p>
 
+                {/* Capabilities + Equipment */}
                 <div className="grid sm:grid-cols-2 gap-10 mb-10">
                   <div>
                     <h4
@@ -144,12 +151,58 @@ export default function Services() {
                   </div>
                 </div>
 
+                {/* Industries Served */}
+                <div className="mb-10">
+                  <h4 className="font-bold mb-4 text-lg" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
+                    Industries Served
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {activeService.industriesServed.map((ind) => (
+                      <span
+                        key={ind}
+                        className="text-xs font-semibold px-3 py-1.5 rounded-md"
+                        style={{ backgroundColor: "#F4F7F9", color: "#0C1E35", border: "1px solid #E8EEF3", letterSpacing: "0.04em", fontFamily: "'Barlow Condensed', sans-serif" }}
+                      >
+                        {ind}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Gallery */}
+                {activeService.gallery.length > 0 && (
+                  <div className="mb-10">
+                    <h4 className="font-bold mb-4 text-lg" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
+                      Gallery
+                    </h4>
+                    <div className="grid grid-cols-3 gap-3">
+                      {activeService.gallery.map((img, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setGalleryImg(img)}
+                          className="group rounded-lg overflow-hidden relative"
+                          style={{ height: "120px", backgroundColor: "#1C354F" }}
+                        >
+                          <img
+                            src={img}
+                            alt={`${activeService.title} gallery ${idx + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200" style={{ backgroundColor: "rgba(12,30,53,0.5)" }}>
+                            <span className="text-white text-2xl">🔍</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <Link
                   to="/request-quote"
                   className="inline-flex items-center gap-2 font-semibold py-3 px-7 rounded"
                   style={{ backgroundColor: "#E85C0D", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em", fontSize: "15px" }}
                 >
-                  REQUEST A QUOTE FOR {activeService.title.toUpperCase()}
+                  REQUEST A QUOTE FOR {activeService.title.toUpperCase()} →
                 </Link>
               </div>
             </div>
@@ -195,6 +248,24 @@ export default function Services() {
           </div>
         </div>
       </section>
+
+      {/* Gallery lightbox */}
+      {galleryImg && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ backgroundColor: "rgba(6,15,28,0.95)" }}
+          onClick={() => setGalleryImg(null)}
+        >
+          <div className="relative max-w-4xl w-full">
+            <img src={galleryImg} alt="Gallery" className="w-full rounded-xl object-contain" style={{ maxHeight: "80vh" }} />
+            <button
+              onClick={() => setGalleryImg(null)}
+              className="absolute -top-4 -right-4 w-10 h-10 rounded-full flex items-center justify-center text-white text-xl font-bold"
+              style={{ backgroundColor: "#E85C0D" }}
+            >×</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

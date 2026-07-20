@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PROJECTS } from "../data/mock";
 
-const CATEGORIES = ["All", "Marine", "Offshore", "Fabrication", "Inspection"];
+const CATEGORIES = ["All", "Marine", "Offshore", "Fabrication", "Inspection", "Maintenance"];
 
 function SectionLabel({ children }: { children: string }) {
   return (
@@ -16,9 +16,21 @@ function SectionLabel({ children }: { children: string }) {
 
 export default function Projects() {
   const [active, setActive] = useState("All");
+  const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<typeof PROJECTS[0] | null>(null);
+  const [galleryIdx, setGalleryIdx] = useState(0);
 
-  const filtered = active === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === active);
+  const filtered = PROJECTS.filter((p) => {
+    const matchCat = active === "All" || p.category === active;
+    const q = search.toLowerCase();
+    const matchSearch = !q || p.title.toLowerCase().includes(q) || p.client.toLowerCase().includes(q) || p.location.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+
+  const openProject = (p: typeof PROJECTS[0]) => {
+    setSelected(p);
+    setGalleryIdx(0);
+  };
 
   return (
     <div>
@@ -51,71 +63,112 @@ export default function Projects() {
       {/* Filters + Grid */}
       <section className="py-24 lg:py-32" style={{ backgroundColor: "#F4F7F9" }}>
         <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
-          {/* Filter bar */}
-          <div className="flex flex-wrap items-center gap-2 mb-12">
-            <span className="text-sm font-semibold mr-2" style={{ color: "#5B6E82", letterSpacing: "0.06em" }}>FILTER:</span>
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                className="px-5 py-2 rounded text-sm font-semibold transition-all duration-150"
-                style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  letterSpacing: "0.06em",
-                  backgroundColor: active === cat ? "#0C1E35" : "#fff",
-                  color: active === cat ? "#fff" : "#5B6E82",
-                  border: `1px solid ${active === cat ? "#0C1E35" : "#C8D5DF"}`,
-                }}
-              >
-                {cat}
-              </button>
-            ))}
+
+          {/* Search + Filter bar */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-10">
+            {/* Search box */}
+            <div className="relative flex-1 max-w-md">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm" style={{ color: "#A0B2C1" }}>🔍</span>
+              <input
+                type="text"
+                placeholder="Search projects, clients, locations..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 rounded-lg text-sm outline-none"
+                style={{ border: "1px solid #C8D5DF", color: "#0C1E35", backgroundColor: "#fff", fontFamily: "'Barlow', sans-serif" }}
+              />
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-steel-400 hover:text-navy-700 text-lg"
+                  style={{ color: "#A0B2C1" }}
+                >×</button>
+              )}
+            </div>
+
+            {/* Category filters */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm font-semibold" style={{ color: "#5B6E82", letterSpacing: "0.06em" }}>FILTER:</span>
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActive(cat)}
+                  className="px-4 py-2 rounded text-sm font-semibold transition-all duration-150"
+                  style={{
+                    fontFamily: "'Barlow Condensed', sans-serif",
+                    letterSpacing: "0.06em",
+                    backgroundColor: active === cat ? "#0C1E35" : "#fff",
+                    color: active === cat ? "#fff" : "#5B6E82",
+                    border: `1px solid ${active === cat ? "#0C1E35" : "#C8D5DF"}`,
+                  }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
 
+          {/* Results count */}
+          <p className="text-sm mb-6" style={{ color: "#A0B2C1" }}>
+            Showing <strong style={{ color: "#0C1E35" }}>{filtered.length}</strong> of {PROJECTS.length} projects
+            {search && <span> matching "<strong style={{ color: "#E85C0D" }}>{search}</strong>"</span>}
+          </p>
+
           {/* Project grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => setSelected(p)}
-                className="group text-left rounded-lg overflow-hidden bg-white border hover:border-orange-500 transition-all duration-200"
-                style={{ borderColor: "#C8D5DF" }}
-              >
-                <div className="overflow-hidden relative" style={{ height: "220px", backgroundColor: "#1C354F" }}>
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div
-                    className="absolute top-3 left-3 px-2.5 py-1 rounded text-xs font-semibold"
-                    style={{ backgroundColor: "#E85C0D", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em" }}
-                  >
-                    {p.category}
+          {filtered.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filtered.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => openProject(p)}
+                  className="group text-left rounded-lg overflow-hidden bg-white border hover:border-orange-500 hover:shadow-lg transition-all duration-200"
+                  style={{ borderColor: "#C8D5DF" }}
+                >
+                  <div className="overflow-hidden relative" style={{ height: "220px", backgroundColor: "#1C354F" }}>
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div
+                      className="absolute top-3 left-3 px-2.5 py-1 rounded text-xs font-semibold"
+                      style={{ backgroundColor: "#E85C0D", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em" }}
+                    >
+                      {p.category}
+                    </div>
                   </div>
-                </div>
-                <div className="p-6">
-                  <p className="text-xs mb-2 font-semibold" style={{ color: "#A0B2C1", letterSpacing: "0.06em" }}>
-                    {p.client} · {p.year}
-                  </p>
-                  <h3
-                    className="font-bold mb-2 text-xl group-hover:text-orange-500 transition-colors"
-                    style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35", lineHeight: 1.2 }}
-                  >
-                    {p.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: "#7A90A4" }}>
-                    {p.scope.slice(0, 90)}...
-                  </p>
-                  <div className="mt-4 flex items-center gap-2">
-                    <span className="text-xs" style={{ color: "#A0B2C1" }}>📍 {p.location}</span>
-                    <span style={{ color: "#C8D5DF" }}>·</span>
-                    <span className="text-xs" style={{ color: "#A0B2C1" }}>⏱ {p.duration}</span>
+                  <div className="p-6">
+                    <p className="text-xs mb-2 font-semibold" style={{ color: "#A0B2C1", letterSpacing: "0.06em" }}>
+                      {p.client} · {p.year}
+                    </p>
+                    <h3
+                      className="font-bold mb-2 text-xl group-hover:text-orange-500 transition-colors"
+                      style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35", lineHeight: 1.2 }}
+                    >
+                      {p.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed" style={{ color: "#7A90A4" }}>
+                      {p.scope.slice(0, 90)}...
+                    </p>
+                    <div className="mt-4 flex items-center gap-3">
+                      <span className="text-xs" style={{ color: "#A0B2C1" }}>📍 {p.location}</span>
+                      <span style={{ color: "#C8D5DF" }}>·</span>
+                      <span className="text-xs" style={{ color: "#A0B2C1" }}>⏱ {p.duration}</span>
+                    </div>
                   </div>
-                </div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <div className="text-5xl mb-4">🔍</div>
+              <h3 className="font-bold text-2xl mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>No Projects Found</h3>
+              <p className="text-sm" style={{ color: "#7A90A4" }}>Try a different search term or category filter.</p>
+              <button onClick={() => { setSearch(""); setActive("All"); }} className="mt-4 text-sm font-semibold" style={{ color: "#E85C0D" }}>
+                Clear filters →
               </button>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -123,29 +176,66 @@ export default function Projects() {
       {selected && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ backgroundColor: "rgba(6,15,28,0.9)" }}
+          style={{ backgroundColor: "rgba(6,15,28,0.92)" }}
           onClick={() => setSelected(null)}
         >
           <div
-            className="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-xl max-w-4xl w-full max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative" style={{ height: "300px", backgroundColor: "#1C354F" }}>
-              <img src={selected.image} alt={selected.title} className="w-full h-full object-cover" />
-              <button
-                onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-white text-lg"
-                style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-              >
-                ×
-              </button>
-              <div
-                className="absolute top-4 left-4 px-3 py-1 rounded text-xs font-semibold"
-                style={{ backgroundColor: "#E85C0D", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em" }}
-              >
+            {/* Gallery header */}
+            <div className="relative" style={{ height: "340px", backgroundColor: "#1C354F" }}>
+              <img
+                src={selected.gallery[galleryIdx] || selected.image}
+                alt={selected.title}
+                className="w-full h-full object-cover transition-opacity duration-300"
+              />
+              {/* Gallery thumbnails */}
+              {selected.gallery.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {selected.gallery.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => { e.stopPropagation(); setGalleryIdx(idx); }}
+                      className="w-16 h-10 rounded overflow-hidden border-2 transition-all"
+                      style={{ borderColor: galleryIdx === idx ? "#E85C0D" : "rgba(255,255,255,0.3)", opacity: galleryIdx === idx ? 1 : 0.65 }}
+                    >
+                      <img src={img} alt="" className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
+              {/* Prev / Next arrows */}
+              {selected.gallery.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setGalleryIdx((i) => (i - 1 + selected.gallery.length) % selected.gallery.length); }}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center text-white font-bold"
+                    style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                  >‹</button>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setGalleryIdx((i) => (i + 1) % selected.gallery.length); }}
+                    className="absolute right-12 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center text-white font-bold"
+                    style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                  >›</button>
+                </>
+              )}
+              {/* Gallery count badge */}
+              <div className="absolute top-4 left-4 px-2.5 py-1 rounded text-xs font-semibold" style={{ backgroundColor: "#E85C0D", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em" }}>
                 {selected.category}
               </div>
+              <div className="absolute top-4 right-4 flex items-center gap-2">
+                <span className="text-xs text-white/70 px-2 py-1 rounded" style={{ backgroundColor: "rgba(0,0,0,0.4)" }}>
+                  {galleryIdx + 1} / {selected.gallery.length}
+                </span>
+                <button
+                  onClick={() => setSelected(null)}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-lg"
+                  style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                >×</button>
+              </div>
             </div>
+
             <div className="p-8">
               <p className="text-xs font-semibold mb-2" style={{ color: "#E85C0D", letterSpacing: "0.1em", fontFamily: "'Barlow Condensed', sans-serif" }}>
                 {selected.client} · {selected.location} · {selected.year}
@@ -154,7 +244,7 @@ export default function Projects() {
                 {selected.title}
               </h2>
 
-              <div className="grid sm:grid-cols-2 gap-6 mb-6">
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
                 <div className="rounded-lg p-4" style={{ backgroundColor: "#F4F7F9" }}>
                   <p className="text-xs font-semibold mb-1" style={{ color: "#A0B2C1", letterSpacing: "0.1em" }}>DURATION</p>
                   <p className="font-semibold" style={{ color: "#0C1E35" }}>{selected.duration}</p>
@@ -178,6 +268,27 @@ export default function Projects() {
                   <p className="text-sm leading-relaxed" style={{ color: "#5B6E82" }}>{item.value}</p>
                 </div>
               ))}
+
+              {/* Gallery grid */}
+              {selected.gallery.length > 0 && (
+                <div className="mt-6">
+                  <p className="text-xs font-semibold mb-3" style={{ color: "#E85C0D", letterSpacing: "0.1em", fontFamily: "'Barlow Condensed', sans-serif" }}>
+                    PROJECT GALLERY
+                  </p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {selected.gallery.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setGalleryIdx(idx)}
+                        className="rounded-lg overflow-hidden transition-all duration-150"
+                        style={{ height: "80px", border: galleryIdx === idx ? "2px solid #E85C0D" : "2px solid transparent" }}
+                      >
+                        <img src={img} alt={`Gallery ${idx + 1}`} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

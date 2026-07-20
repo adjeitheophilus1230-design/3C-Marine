@@ -41,16 +41,32 @@ export default function Footer() {
               Delivering reliable engineering solutions through innovation, safety and technical expertise across marine, offshore, and industrial sectors.
             </p>
             <div className="flex gap-3">
-              {["LinkedIn", "X"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="text-xs px-3 py-1.5 rounded border transition-colors hover:border-orange-500"
-                  style={{ borderColor: "rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.6)", letterSpacing: "0.05em" }}
-                >
-                  {s}
-                </a>
-              ))}
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/company/3c-marine-engineering"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="3C Marine Engineering on LinkedIn"
+                className="w-9 h-9 rounded flex items-center justify-center transition-colors hover:bg-orange-500"
+                style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{ color: "rgba(255,255,255,0.7)" }}>
+                  <path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.74A1.76 1.76 0 1 1 8.26 5a1.76 1.76 0 0 1-1.76 1.74zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77C14.4 7.5 20 7.34 20 12.74V19z"/>
+                </svg>
+              </a>
+              {/* X / Twitter */}
+              <a
+                href="https://twitter.com/3cmarinegh"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="3C Marine Engineering on X"
+                className="w-9 h-9 rounded flex items-center justify-center transition-colors hover:bg-orange-500"
+                style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style={{ color: "rgba(255,255,255,0.7)" }}>
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
             </div>
           </div>
 

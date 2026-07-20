@@ -126,7 +126,7 @@ export default function About() {
           </div>
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1563803444671-b8a07a3a79a6?w=800&h=600&fit=crop&auto=format"
+              src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=600&fit=crop&auto=format"
               alt="Offshore operations"
               className="w-full rounded-lg"
               style={{ aspectRatio: "4/3", objectFit: "cover" }}
@@ -233,9 +233,21 @@ export default function About() {
                 >
                   {person.name}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#7A90A4" }}>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "#7A90A4" }}>
                   {person.bio.slice(0, 120)}...
                 </p>
+                <a
+                  href={person.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs font-semibold transition-colors hover:text-orange-500"
+                  style={{ color: "#0C1E35", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.06em" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.74A1.76 1.76 0 1 1 8.26 5a1.76 1.76 0 0 1-1.76 1.74zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77C14.4 7.5 20 7.34 20 12.74V19z"/>
+                  </svg>
+                  VIEW PROFILE
+                </a>
               </div>
             ))}
           </div>

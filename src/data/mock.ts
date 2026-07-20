@@ -1,8 +1,8 @@
 export const STATS = [
-  { value: "150+", label: "Projects Completed" },
-  { value: "85+", label: "Engineering Specialists" },
-  { value: "12+", label: "Industries Served" },
-  { value: "25", label: "Years Experience" },
+  { value: 150, suffix: "+", label: "Projects Completed" },
+  { value: 85, suffix: "+", label: "Engineering Specialists" },
+  { value: 12, suffix: "+", label: "Industries Served" },
+  { value: 25, suffix: "", label: "Years Experience" },
 ];
 
 export const SERVICES = [
@@ -20,7 +20,13 @@ export const SERVICES = [
       "Class society compliance and certification",
     ],
     equipment: ["Underwater ROV systems", "Non-destructive testing equipment", "3D laser scanning", "Hydraulic jacking systems"],
-    image: "https://images.unsplash.com/photo-1532996122724-e3c029531515?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Maritime", "Ports & Terminals", "Oil & Gas", "Government & Defence"],
+    gallery: [
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=500&fit=crop&auto=format",
     icon: "⚓",
   },
   {
@@ -37,7 +43,13 @@ export const SERVICES = [
       "Riser and mooring system engineering",
     ],
     equipment: ["Dynamic positioning vessels", "Heavy lift barges", "Subsea ROV fleet", "Saturation diving systems"],
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Oil & Gas", "Energy", "Government & Defence"],
+    gallery: [
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=500&fit=crop&auto=format",
     icon: "🛢️",
   },
   {
@@ -54,7 +66,13 @@ export const SERVICES = [
       "Commissioning and start-up support",
     ],
     equipment: ["Heavy construction plant", "Pipe fabrication shop", "Non-destructive testing lab", "Survey and measurement tools"],
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Oil & Gas", "Energy", "Industrial Construction", "Government & Defence"],
+    gallery: [
+      "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=800&h=500&fit=crop&auto=format",
     icon: "🏭",
   },
   {
@@ -71,6 +89,12 @@ export const SERVICES = [
       "ASME and AWS certified welding",
     ],
     equipment: ["50-tonne overhead cranes", "CNC plasma cutting", "Automated welding systems", "NDT laboratory"],
+    industriesServed: ["Oil & Gas", "Maritime", "Industrial Construction", "Energy"],
+    gallery: [
+      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=600&h=400&fit=crop&auto=format",
+    ],
     image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&h=500&fit=crop&auto=format",
     icon: "🔧",
   },
@@ -88,7 +112,13 @@ export const SERVICES = [
       "Commissioning and handover",
     ],
     equipment: ["Crane barges", "Anchor handling tugs", "Survey vessels", "Remotely operated vehicles"],
-    image: "https://images.unsplash.com/photo-1590762104718-8dd98b0278aa?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Oil & Gas", "Ports & Terminals", "Energy", "Maritime"],
+    gallery: [
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=500&fit=crop&auto=format",
     icon: "🏗️",
   },
   {
@@ -105,7 +135,13 @@ export const SERVICES = [
       "Fitness for service evaluation",
     ],
     equipment: ["Phased array UT systems", "Rope access equipment", "Underwater cameras", "Drone inspection fleet"],
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Oil & Gas", "Maritime", "Ports & Terminals", "Government & Defence", "Industrial Construction"],
+    gallery: [
+      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=500&fit=crop&auto=format",
     icon: "🔍",
   },
   {
@@ -122,7 +158,13 @@ export const SERVICES = [
       "Emergency breakdown response",
     ],
     equipment: ["Mobile workshop units", "Hydraulic torque tools", "Vibration analysis instruments", "Thermal imaging cameras"],
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Maritime", "Oil & Gas", "Ports & Terminals", "Industrial Construction"],
+    gallery: [
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop&auto=format",
     icon: "⚙️",
   },
   {
@@ -139,7 +181,13 @@ export const SERVICES = [
       "Risk and HAZOP studies",
     ],
     equipment: ["Engineering software suites (ANSYS, AutoCAD, STAAD)", "Project management platforms", "Document management systems"],
-    image: "https://images.unsplash.com/photo-1498624854366-fe47b59658d7?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Oil & Gas", "Government & Defence", "Energy", "Maritime", "Ports & Terminals"],
+    gallery: [
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=500&fit=crop&auto=format",
     icon: "📋",
   },
   {
@@ -156,7 +204,13 @@ export const SERVICES = [
       "Project cargo logistics",
     ],
     equipment: ["Anchor handling tugs", "Platform supply vessels", "Crew transfer boats", "Cargo barges"],
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=500&fit=crop&auto=format",
+    industriesServed: ["Oil & Gas", "Maritime", "Ports & Terminals", "Energy"],
+    gallery: [
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format",
+    ],
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop&auto=format",
     icon: "🚢",
   },
 ];
@@ -176,8 +230,9 @@ export const PROJECTS = [
     results: "Extended asset service life by an estimated 15 years. 100% on-time delivery across all 12 berths.",
     image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=500&fit=crop&auto=format",
     gallery: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format",
-      "https://images.unsplash.com/photo-1532996122724-e3c029531515?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&h=450&fit=crop&auto=format",
     ],
   },
   {
@@ -192,10 +247,11 @@ export const PROJECTS = [
     challenge: "Complex deepwater environment requiring bespoke structural solutions rated for 1,500m water depth with limited local supply chain.",
     solution: "Engineered purpose-built subsea frames utilising our in-house fabrication facility and internationally sourced materials to maintain schedule.",
     results: "Structures successfully installed ahead of schedule. Zero LTIs during a 240,000-man-hour project.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=500&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=500&fit=crop&auto=format",
     gallery: [
-      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&auto=format",
-      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=450&fit=crop&auto=format",
     ],
   },
   {
@@ -210,10 +266,11 @@ export const PROJECTS = [
     challenge: "Tight dry-dock schedule requiring concurrent multi-vessel inspection and repair mobilisation across three facilities.",
     solution: "Assembled a 45-person inspection task force with dedicated NDT teams per vessel, ensuring no schedule conflicts and clear reporting chains.",
     results: "All 8 vessels returned to service on schedule. Full class renewal achieved for each hull.",
-    image: "https://images.unsplash.com/photo-1532996122724-e3c029531515?w=800&h=500&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=500&fit=crop&auto=format",
     gallery: [
-      "https://images.unsplash.com/photo-1532996122724-e3c029531515?w=600&h=400&fit=crop&auto=format",
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&h=450&fit=crop&auto=format",
     ],
   },
   {
@@ -230,8 +287,9 @@ export const PROJECTS = [
     results: "Facility handed over 3 weeks ahead of programme. Increased client fabrication capacity by 300%.",
     image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&h=500&fit=crop&auto=format",
     gallery: [
-      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop&auto=format",
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=700&h=450&fit=crop&auto=format",
     ],
   },
   {
@@ -246,8 +304,12 @@ export const PROJECTS = [
     challenge: "All work executed on a live producing FPSO requiring strict simultaneous operations protocols and isolation management.",
     solution: "Developed a detailed SIMOPS plan approved by all parties. All critical work executed within 72-hour production windows.",
     results: "Zero production impact. Bearing system life extended by 10 years. Maintenance delivered 5% under budget.",
-    image: "https://images.unsplash.com/photo-1590762104718-8dd98b0278aa?w=800&h=500&fit=crop&auto=format",
-    gallery: [],
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=500&fit=crop&auto=format",
+    gallery: [
+      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&h=450&fit=crop&auto=format",
+    ],
   },
   {
     id: "port-access-trestle",
@@ -261,8 +323,12 @@ export const PROJECTS = [
     challenge: "Construction in a live port environment with heavy vessel traffic and stringent environmental restrictions on in-water works.",
     solution: "Adopted a top-down construction methodology using a barge-mounted crane, completing all pile installation during designated weather windows.",
     results: "Trestle completed and commissioned on time. Milestone critical to the Ghana National Port Master Plan.",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=500&fit=crop&auto=format",
-    gallery: [],
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop&auto=format",
+    gallery: [
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&h=450&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=700&h=450&fit=crop&auto=format",
+    ],
   },
 ];
 
@@ -272,28 +338,28 @@ export const TEAM = [
     role: "Managing Director",
     bio: "Kofi brings over 28 years of experience in marine and offshore engineering across West Africa, the North Sea, and the Middle East. He founded 3C Marine Engineering with a vision to deliver international-standard engineering services from Ghana.",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/kofi-mensah-3cmarine",
   },
   {
     name: "Abena Asante-Boateng",
     role: "Operations Director",
     bio: "Abena oversees all project delivery operations and has managed programmes totalling over $200M across marine, fabrication, and offshore sectors. She holds an MBA from Henley Business School and a BEng in Mechanical Engineering.",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/abena-asante-boateng",
   },
   {
     name: "Emmanuel Quaye",
     role: "Chief Engineer",
     bio: "Emmanuel is a Chartered Mechanical Engineer with 22 years in structural and marine engineering. He leads all technical design activities and maintains the company's relationships with class societies and regulatory bodies.",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&auto=format",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/emmanuel-quaye-ceng",
   },
   {
     name: "Sandra Osei",
     role: "HSE Manager",
     bio: "Sandra is an internationally certified HSE professional with a track record of zero-LTI project delivery across offshore and industrial environments. She leads 3C's safety management system and training programmes.",
     image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=400&h=400&fit=crop&auto=format",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/sandra-osei-hse",
   },
 ];
 
@@ -315,7 +381,7 @@ export const NEWS = [
     category: "Company News",
     excerpt:
       "3C Marine Engineering has been awarded a three-year integrated maintenance contract for a major FPSO operating in Ghanaian deepwater, covering structural, mechanical, and electrical systems.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=450&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=450&fit=crop&auto=format",
     readTime: "4 min read",
   },
   {
@@ -325,7 +391,7 @@ export const NEWS = [
     category: "HSE",
     excerpt:
       "Our team has achieved a significant milestone — one million cumulative man-hours without a single Lost Time Injury. This achievement reflects the relentless commitment of every member of our workforce to operating safely.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=450&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=450&fit=crop&auto=format",
     readTime: "3 min read",
   },
   {
@@ -335,7 +401,7 @@ export const NEWS = [
     category: "Industry Insights",
     excerpt:
       "As the Gulf of Guinea deepwater frontier continues to develop, West African engineering firms face both unprecedented opportunities and technical challenges. Our Chief Engineer shares his perspective on the skills and infrastructure needed.",
-    image: "https://images.unsplash.com/photo-1563803444671-b8a07a3a79a6?w=800&h=450&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=450&fit=crop&auto=format",
     readTime: "6 min read",
   },
   {
@@ -355,7 +421,7 @@ export const NEWS = [
     category: "Technical",
     excerpt:
       "Our corrosion engineering team has published a technical paper on optimised coating systems for structural steel in the Gulf of Guinea's aggressive marine environment, drawing on 25 years of field data.",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=450&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=800&h=450&fit=crop&auto=format",
     readTime: "8 min read",
   },
   {
@@ -365,7 +431,7 @@ export const NEWS = [
     category: "Careers",
     excerpt:
       "Applications for the 3C Marine Engineering 2025 Graduate Engineer Programme are now open. We are seeking high-calibre engineering graduates to join a structured two-year development programme.",
-    image: "https://images.unsplash.com/photo-1581092921461-7031e4d02e40?w=800&h=450&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=450&fit=crop&auto=format",
     readTime: "2 min read",
   },
 ];
@@ -426,7 +492,7 @@ export const INDUSTRIES = [
     id: "oil-gas",
     title: "Oil & Gas",
     description: "Delivering engineering solutions across upstream, midstream, and downstream oil and gas operations — from wellhead to terminal.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&h=500&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=500&fit=crop&auto=format",
     services: ["Offshore Engineering", "FPSO Services", "Subsea Installation", "Pipeline Engineering", "Terminal Construction"],
     clients: "Major international and national oil companies operating in West Africa.",
   },
@@ -434,7 +500,7 @@ export const INDUSTRIES = [
     id: "maritime",
     title: "Maritime",
     description: "Full-lifecycle engineering support for commercial shipping operators — dry bulk, tankers, container vessels, and specialised craft.",
-    image: "https://images.unsplash.com/photo-1532996122724-e3c029531515?w=800&h=500&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=500&fit=crop&auto=format",
     services: ["Vessel Structural Inspection", "Dry Dock Services", "Class Renewal", "Hull Maintenance", "Marine Systems Engineering"],
     clients: "Shipping companies, fleet operators, and vessel owners.",
   },
@@ -450,7 +516,7 @@ export const INDUSTRIES = [
     id: "energy",
     title: "Energy",
     description: "Supporting the evolving energy sector across conventional and emerging segments with engineering rigour and safety-first delivery.",
-    image: "https://images.unsplash.com/photo-1563803444671-b8a07a3a79a6?w=800&h=500&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=500&fit=crop&auto=format",
     services: ["LNG Terminal Engineering", "Power Plant Structural Works", "Renewables Marine Infrastructure", "Energy Storage Engineering"],
     clients: "Energy companies, utilities, and project developers.",
   },
@@ -458,7 +524,7 @@ export const INDUSTRIES = [
     id: "government",
     title: "Government & Defence",
     description: "Trusted by government agencies, naval commands, and public bodies for sensitive infrastructure projects demanding the highest standards of integrity.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&h=500&fit=crop&auto=format",
     services: ["Naval Vessel Maintenance", "Government Port Works", "Strategic Infrastructure Engineering", "Compliance and Regulatory Support"],
     clients: "Government ministries, port authorities, and defence organisations.",
   },
@@ -466,7 +532,7 @@ export const INDUSTRIES = [
     id: "construction",
     title: "Industrial Construction",
     description: "Heavy industrial construction and plant engineering for refineries, chemical plants, and large-scale manufacturing facilities.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=500&fit=crop&auto=format",
+    image: "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=800&h=500&fit=crop&auto=format",
     services: ["Process Plant Construction", "Structural Steel Fabrication", "Piping and Mechanical Installation", "Plant Commissioning"],
     clients: "Refinery operators, industrial manufacturers, and EPC contractors.",
   },
@@ -479,4 +545,31 @@ export const CERTIFICATIONS = [
   { name: "CSWIP", body: "Welding Inspection Certification", issuer: "TWI" },
   { name: "API 650 / 653", body: "Storage Tank Engineering", issuer: "American Petroleum Institute" },
   { name: "ASME", body: "Pressure Vessel Fabrication", issuer: "ASME International" },
+];
+
+export const TESTIMONIALS = [
+  {
+    id: 1,
+    quote: "3C Marine Engineering delivered the Tema berth maintenance programme ahead of schedule and to a standard that exceeded our expectations. Their underwater inspection team was exceptional.",
+    author: "Daniel Abrokwah",
+    role: "Port Infrastructure Manager",
+    company: "Ghana Ports & Harbours Authority",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&auto=format",
+  },
+  {
+    id: 2,
+    quote: "The FPSO turret overhaul was executed with zero production impact on a live asset — a genuinely impressive feat. We have relied on 3C for three consecutive maintenance scopes and will continue to do so.",
+    author: "Alistair Cameron",
+    role: "Asset Integrity Manager",
+    company: "Tullow Oil Ghana",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&auto=format",
+  },
+  {
+    id: 3,
+    quote: "From bid to handover, 3C demonstrated the technical depth and project discipline of a Tier 1 contractor. Their HSE record on our deepwater support structures project was exemplary.",
+    author: "Ingrid Sørensen",
+    role: "Projects Director",
+    company: "Aker Energy Ghana",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&auto=format",
+  },
 ];

@@ -25,7 +25,7 @@ export default function News() {
       {/* Hero */}
       <section className="relative flex items-end pb-20 pt-36 overflow-hidden" style={{ backgroundColor: "#0C1E35", minHeight: "420px" }}>
         <img
-          src="https://images.unsplash.com/photo-1498624854366-fe47b59658d7?w=1600&h=700&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&h=700&fit=crop&auto=format"
           alt="Marine engineering news"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.2 }}

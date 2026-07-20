@@ -15,6 +15,7 @@ function SectionLabel({ children }: { children: string }) {
 export default function Careers() {
   const [applyJob, setApplyJob] = useState<typeof JOBS[0] | null>(null);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [cvFile, setCvFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,12 +23,19 @@ export default function Careers() {
     setSubmitted(true);
   };
 
+  const resetModal = (job: typeof JOBS[0]) => {
+    setApplyJob(job);
+    setSubmitted(false);
+    setCvFile(null);
+    setForm({ name: "", email: "", phone: "", message: "" });
+  };
+
   return (
     <div>
       {/* Hero */}
       <section className="relative flex items-end pb-20 pt-36 overflow-hidden" style={{ backgroundColor: "#0C1E35", minHeight: "460px" }}>
         <img
-          src="https://images.unsplash.com/photo-1581092921461-7031e4d02e40?w=1600&h=700&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=700&fit=crop&auto=format"
           alt="Engineering careers"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.22 }}
@@ -102,7 +110,7 @@ export default function Careers() {
                   <p className="text-sm" style={{ color: "#7A90A4" }}>{job.description}</p>
                 </div>
                 <button
-                  onClick={() => { setApplyJob(job); setSubmitted(false); setForm({ name: "", email: "", phone: "", message: "" }); }}
+                  onClick={() => resetModal(job)}
                   className="flex-shrink-0 font-semibold py-3 px-6 rounded transition-all duration-150 hover:opacity-90"
                   style={{ backgroundColor: "#0C1E35", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em", fontSize: "14px" }}
                 >
@@ -140,7 +148,7 @@ export default function Careers() {
               ))}
             </ul>
             <button
-              onClick={() => { const grad = JOBS.find((j) => j.type === "Graduate Programme"); if (grad) { setApplyJob(grad); setSubmitted(false); setForm({ name: "", email: "", phone: "", message: "" }); } }}
+              onClick={() => resetModal(JOBS.find((j) => j.type === "Graduate Programme")!)}
               className="font-semibold py-3 px-7 rounded"
               style={{ backgroundColor: "#E85C0D", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em", fontSize: "15px" }}
             >
@@ -149,7 +157,7 @@ export default function Careers() {
           </div>
           <div>
             <img
-              src="https://images.unsplash.com/photo-1581092921461-7031e4d02e40?w=800&h=600&fit=crop&auto=format"
+              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop&auto=format"
               alt="Graduate engineers"
               className="w-full rounded-lg"
               style={{ aspectRatio: "4/3", objectFit: "cover" }}
@@ -221,8 +229,28 @@ export default function Careers() {
                       style={{ border: "1px solid #C8D5DF", color: "#0C1E35" }}
                     />
                   </div>
-                  <div className="rounded-lg p-4 text-xs" style={{ backgroundColor: "#F4F7F9", color: "#A0B2C1" }}>
-                    📎 CV upload functionality will be enabled on site launch. For now, email your CV to <strong>careers@3cmarineengineering.com</strong>
+                  <div>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#5B6E82", letterSpacing: "0.08em" }}>
+                      UPLOAD CV / RESUME *
+                    </label>
+                    <label
+                      className="flex items-center gap-3 w-full px-4 py-3 rounded-lg cursor-pointer transition-colors"
+                      style={{ border: `2px dashed ${cvFile ? "#E85C0D" : "#C8D5DF"}`, backgroundColor: cvFile ? "#FFF0E8" : "#fff" }}
+                    >
+                      <span className="text-xl">{cvFile ? "📄" : "📎"}</span>
+                      <span className="text-sm flex-1" style={{ color: cvFile ? "#E85C0D" : "#A0B2C1" }}>
+                        {cvFile ? cvFile.name : "Click to upload your CV (PDF, DOC, DOCX — max 5MB)"}
+                      </span>
+                      {cvFile && (
+                        <button type="button" onClick={(e) => { e.preventDefault(); setCvFile(null); }} className="text-xs" style={{ color: "#A0B2C1" }}>Remove</button>
+                      )}
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        className="hidden"
+                        onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+                      />
+                    </label>
                   </div>
                   <button
                     type="submit"

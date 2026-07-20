@@ -34,13 +34,37 @@ export default function Nav() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md"
       style={{
-        backgroundColor: transparent ? "transparent" : "#0C1E35",
-        borderBottom: transparent ? "none" : "1px solid rgba(255,255,255,0.08)",
+        backgroundColor: transparent ? "rgba(12,30,53,0.4)" : "rgba(12,30,53,0.92)",
+        borderBottom: transparent ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(255,255,255,0.12)",
+        boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.3)" : "none",
       }}
     >
-      <div className="max-w-screen-xl mx-auto px-6 lg:px-10 flex items-center justify-between h-[72px]">
+      {/* Top Utility Bar */}
+      <div className="hidden md:block bg-navy-950/60 border-b border-white/5 py-1.5 px-6 lg:px-10 text-xs">
+        <div className="max-w-screen-xl mx-auto flex items-center justify-between text-steel-300">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <strong className="text-white font-medium">Tema Port Base:</strong> Active 24/7 Operations
+            </span>
+            <span className="hidden lg:inline text-steel-400">|</span>
+            <span className="hidden lg:inline">📍 Tema Harbour Industrial Area, Ghana</span>
+          </div>
+          <div className="flex items-center gap-5">
+            <a href="tel:+233200003C3C" className="hover:text-orange-400 transition-colors flex items-center gap-1 font-medium">
+              📞 24/7 Emergency Response: +233 (0) 30 290 8899
+            </a>
+            <span className="text-steel-400">|</span>
+            <a href="mailto:info@3cmarineengineering.com" className="hover:text-orange-400 transition-colors">
+              ✉️ info@3cmarineengineering.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-screen-xl mx-auto px-6 lg:px-10 flex items-center justify-between h-[68px]">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 flex-shrink-0">
           <div

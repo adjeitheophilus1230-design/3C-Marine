@@ -225,9 +225,28 @@ export default function RequestQuote() {
                   </Field>
 
                   <div className="md:col-span-2">
-                    <div className="rounded-lg p-4 text-xs mb-5" style={{ backgroundColor: "#F4F7F9", color: "#A0B2C1" }}>
-                      📎 Document attachment (drawings, specs, RFQ documents) will be enabled on site launch. Please mention if you have documents to share and we will follow up by email.
-                    </div>
+                    <label className="block text-xs font-semibold mb-2" style={{ color: "#5B6E82", letterSpacing: "0.1em" }}>
+                      ATTACHMENT (DRAWINGS, SPECS, RFQ DOCUMENTS)
+                    </label>
+                    <label
+                      className="flex items-center gap-3 w-full px-4 py-3 rounded-lg cursor-pointer transition-colors"
+                      style={{ border: `2px dashed ${form.description ? "#C8D5DF" : "#C8D5DF"}`, backgroundColor: "#fff" }}
+                      id="attachment-upload-label"
+                    >
+                      <span className="text-xl">📎</span>
+                      <span className="text-sm flex-1" style={{ color: "#A0B2C1" }}>
+                        Click to attach documents (PDF, DWG, DOCX — max 10MB). Mention in description if you have files to share.
+                      </span>
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx,.dwg,.xlsx,.xls,application/pdf,application/msword"
+                        className="hidden"
+                        id="quote-attachment"
+                        multiple
+                      />
+                    </label>
+                  </div>
+                  <div className="md:col-span-2">
                     <button
                       type="submit"
                       className="w-full font-bold py-4 rounded text-base"

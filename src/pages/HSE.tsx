@@ -25,7 +25,7 @@ export default function HSE() {
       {/* Hero */}
       <section className="relative flex items-end pb-20 pt-36 overflow-hidden" style={{ backgroundColor: "#0C1E35", minHeight: "500px" }}>
         <img
-          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&h=700&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1600&h=700&fit=crop&auto=format"
           alt="Safety engineering team"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.25 }}

@@ -48,3 +48,23 @@ h1, h2, h3, h4, h5 {
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #5B6E82; border-radius: 2px; }
+
+@keyframes logoMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-marquee {
+  display: flex;
+  width: max-content;
+  animation: logoMarquee 25s linear infinite;
+}
+
+.animate-logo-marquee:hover {
+  animation-play-state: paused;
+}
+

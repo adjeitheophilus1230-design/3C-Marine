@@ -21,7 +21,7 @@ export default function Industries() {
       {/* Hero */}
       <section className="relative flex items-end pb-20 pt-36 overflow-hidden" style={{ backgroundColor: "#0C1E35", minHeight: "460px" }}>
         <img
-          src="https://images.unsplash.com/photo-1563803444671-b8a07a3a79a6?w=1600&h=700&fit=crop&auto=format"
+          src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&h=700&fit=crop&auto=format"
           alt="Industries served"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ opacity: 0.22 }}
