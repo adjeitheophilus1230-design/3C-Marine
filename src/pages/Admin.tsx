@@ -116,8 +116,8 @@ export default function Admin() {
 
   if (!authenticated) {
     return (
-      <div className="min-h-[85vh] flex items-center justify-center py-20 px-6" style={{ backgroundColor: "#060F1C" }}>
-        <div className="max-w-md w-full bg-white rounded-2xl p-10 shadow-2xl border border-slate-200">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-6 overflow-y-auto" style={{ backgroundColor: "#060F1C" }}>
+        <div className="max-w-md w-full bg-white rounded-2xl p-10 shadow-2xl border border-slate-200 my-auto">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-white text-xl" style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}>
               3C
