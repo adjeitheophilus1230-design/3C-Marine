@@ -116,8 +116,25 @@ export default function Admin() {
 
   if (!authenticated) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-6 overflow-y-auto" style={{ backgroundColor: "#060F1C" }}>
-        <div className="max-w-md w-full bg-white rounded-2xl p-10 shadow-2xl border border-slate-200 my-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-6 overflow-y-auto relative" style={{ backgroundColor: "#060F1C" }}>
+        {/* Marine Engineering Background Image & Overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&h=1080&fit=crop&auto=format"
+            alt="3C Marine Engineering Offshore Operations"
+            className="w-full h-full object-cover opacity-40 scale-105"
+            style={{ filter: "brightness(0.5) contrast(1.2)" }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "radial-gradient(circle at center, rgba(6,15,28,0.65) 0%, rgba(6,15,28,0.92) 100%)",
+            }}
+          />
+        </div>
+
+        {/* Centered Login Card */}
+        <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-md rounded-2xl p-10 shadow-2xl border border-white/30 my-auto">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-white text-xl" style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}>
               3C
