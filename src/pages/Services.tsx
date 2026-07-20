@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { SERVICES } from "../data/mock";
+import { useCMS } from "../context/CMSContext";
 import { SERVICE_ICONS, SearchIcon } from "../components/Icons";
 
 function SectionLabel({ children }: { children: string }) {
@@ -18,10 +18,11 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 export default function Services() {
-  const [activeService, setActiveService] = useState(SERVICES[0]);
+  const { services } = useCMS();
+  const [activeService, setActiveService] = useState(services[0] || {});
   const [galleryImg, setGalleryImg] = useState<string | null>(null);
 
-  const handleServiceChange = (s: typeof SERVICES[0]) => {
+  const handleServiceChange = (s: typeof services[0]) => {
     setActiveService(s);
   };
 
@@ -66,7 +67,7 @@ export default function Services() {
                 SELECT A SERVICE
               </p>
               <nav className="flex flex-col gap-1">
-                {SERVICES.map((s) => (
+                {services.map((s) => (
                   <button
                     key={s.id}
                     onClick={() => handleServiceChange(s)}

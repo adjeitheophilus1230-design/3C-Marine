@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NEWS } from "../data/mock";
+import { useCMS } from "../context/CMSContext";
 
 function SectionLabel({ children }: { children: string }) {
   return (
@@ -15,10 +15,11 @@ function SectionLabel({ children }: { children: string }) {
 const CATEGORIES = ["All", "Company News", "HSE", "Industry Insights", "Technical", "Careers"];
 
 export default function News() {
+  const { news } = useCMS();
   const [activeCategory, setActiveCategory] = useState("All");
-  const [selected, setSelected] = useState<typeof NEWS[0] | null>(null);
+  const [selected, setSelected] = useState<typeof news[0] | null>(null);
 
-  const filtered = activeCategory === "All" ? NEWS : NEWS.filter((n) => n.category === activeCategory);
+  const filtered = activeCategory === "All" ? news : news.filter((n) => n.category === activeCategory);
 
   return (
     <div>

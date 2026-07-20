@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { TEAM, TIMELINE } from "../data/mock";
+import { useCMS } from "../context/CMSContext";
 
 function SectionLabel({ children }: { children: string }) {
   return (
@@ -45,6 +45,7 @@ function PageHero({ title, subtitle, image }: { title: string; subtitle: string;
 }
 
 export default function About() {
+  const { team, timeline } = useCMS();
   return (
     <div>
       <PageHero
@@ -157,8 +158,8 @@ export default function About() {
               className="absolute left-[88px] top-0 bottom-0 w-px hidden lg:block"
               style={{ backgroundColor: "rgba(255,255,255,0.1)" }}
             />
-            <div className="flex flex-col gap-10">
-              {TIMELINE.map((item, i) => (
+            <div className="flex flex-col gap-8 relative before:absolute before:left-4 before:top-4 before:bottom-4 before:w-px before:bg-orange-500/30">
+            {timeline.map((item) => (
                 <div key={item.year} className="flex flex-col lg:flex-row gap-6 lg:gap-10 items-start">
                   <div
                     className="flex-shrink-0 font-bold text-2xl w-20 text-right relative"
@@ -209,7 +210,7 @@ export default function About() {
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {TEAM.map((person) => (
+            {team.map((person) => (
               <div key={person.name} className="group">
                 <div
                   className="overflow-hidden rounded-lg mb-5"

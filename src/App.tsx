@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CMSProvider } from "./context/CMSContext";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -11,29 +12,33 @@ import News from "./pages/News";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import RequestQuote from "./pages/RequestQuote";
+import Admin from "./pages/Admin";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen flex flex-col">
-        <Nav />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/industries" element={<Industries />} />
-            <Route path="/hse" element={<HSE />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/request-quote" element={<RequestQuote />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <CMSProvider>
+      <BrowserRouter>
+        <div className="min-h-screen flex flex-col">
+          <Nav />
+          <main className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/industries" element={<Industries />} />
+              <Route path="/hse" element={<HSE />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/request-quote" element={<RequestQuote />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </CMSProvider>
   );
 }

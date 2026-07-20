@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PROJECTS } from "../data/mock";
+import { useCMS } from "../context/CMSContext";
 import { SearchIcon, MapPinIcon, ClockIcon } from "../components/Icons";
 
 const CATEGORIES = ["All", "Marine", "Offshore", "Fabrication", "Inspection", "Maintenance"];
@@ -16,19 +16,20 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 export default function Projects() {
+  const { projects } = useCMS();
   const [active, setActive] = useState("All");
   const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState<typeof PROJECTS[0] | null>(null);
+  const [selected, setSelected] = useState<typeof projects[0] | null>(null);
   const [galleryIdx, setGalleryIdx] = useState(0);
 
-  const filtered = PROJECTS.filter((p) => {
+  const filtered = projects.filter((p) => {
     const matchCat = active === "All" || p.category === active;
     const q = search.toLowerCase();
     const matchSearch = !q || p.title.toLowerCase().includes(q) || p.client.toLowerCase().includes(q) || p.location.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
     return matchCat && matchSearch;
   });
 
-  const openProject = (p: typeof PROJECTS[0]) => {
+  const openProject = (p: typeof projects[0]) => {
     setSelected(p);
     setGalleryIdx(0);
   };
@@ -113,7 +114,7 @@ export default function Projects() {
 
           {/* Results count */}
           <p className="text-sm mb-6" style={{ color: "#A0B2C1" }}>
-            Showing <strong style={{ color: "#0C1E35" }}>{filtered.length}</strong> of {PROJECTS.length} projects
+            Showing <strong style={{ color: "#0C1E35" }}>{filtered.length}</strong> of {projects.length} projects
             {search && <span> matching "<strong style={{ color: "#E85C0D" }}>{search}</strong>"</span>}
           </p>
 

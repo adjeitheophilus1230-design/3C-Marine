@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { JOBS } from "../data/mock";
+import { useCMS } from "../context/CMSContext";
 import { GlobeIcon, TrendingUpIcon, GraduationCapIcon, ShieldIcon, BadgeCheckIcon, MapPinIcon } from "../components/Icons";
 
 function SectionLabel({ children }: { children: string }) {
@@ -14,7 +14,8 @@ function SectionLabel({ children }: { children: string }) {
 }
 
 export default function Careers() {
-  const [applyJob, setApplyJob] = useState<typeof JOBS[0] | null>(null);
+  const { jobs } = useCMS();
+  const [applyJob, setApplyJob] = useState<typeof jobs[0] | null>(null);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -24,7 +25,7 @@ export default function Careers() {
     setSubmitted(true);
   };
 
-  const resetModal = (job: typeof JOBS[0]) => {
+  const resetModal = (job: typeof jobs[0]) => {
     setApplyJob(job);
     setSubmitted(false);
     setCvFile(null);
@@ -90,7 +91,7 @@ export default function Careers() {
           </h2>
 
           <div className="flex flex-col gap-4">
-            {JOBS.map((job) => (
+            {jobs.map((job) => (
               <div
                 key={job.id}
                 className="bg-white rounded-lg p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 border"
@@ -154,7 +155,7 @@ export default function Careers() {
               ))}
             </ul>
             <button
-              onClick={() => resetModal(JOBS.find((j) => j.type === "Graduate Programme")!)}
+              onClick={() => resetModal(jobs.find((j) => j.type === "Graduate Programme") || jobs[0])}
               className="font-semibold py-3 px-7 rounded"
               style={{ backgroundColor: "#E85C0D", color: "#fff", fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.08em", fontSize: "15px" }}
             >

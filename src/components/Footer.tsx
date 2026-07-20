@@ -194,12 +194,15 @@ export default function Footer() {
         <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
           © {new Date().getFullYear()} 3C Marine Engineering Limited. All rights reserved.
         </p>
-        <div className="flex gap-5">
+        <div className="flex items-center gap-5">
           {["Privacy Policy", "Terms of Use", "Sitemap"].map((l) => (
             <a key={l} href="#" className="text-xs transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>
               {l}
             </a>
           ))}
+          <Link to="/admin" className="text-xs transition-colors hover:text-orange-400 font-semibold" style={{ color: "#E85C0D" }}>
+            CMS Admin Portal
+          </Link>
         </div>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { STATS, SERVICES, PROJECTS, NEWS, TESTIMONIALS } from "../data/mock";
+import { useCMS } from "../context/CMSContext";
 import PartnerLogos from "../components/PartnerLogos";
 import { SERVICE_ICONS, ShieldIcon, LeafIcon, BadgeCheckIcon } from "../components/Icons";
 
@@ -69,19 +69,11 @@ function AnimatedCounter({ target, suffix, duration = 1600 }: { target: number; 
   );
 }
 
-const FEATURED_PROJECTS = PROJECTS.slice(0, 4);
-const FEATURED_NEWS = NEWS.slice(0, 3);
-
-const PARTNER_NAMES = [
-  "Ghana Ports & Harbours Authority",
-  "Tullow Oil",
-  "Aker Energy",
-  "Black Star Line",
-  "Sentuo Refinery",
-  "Meridian Port Services",
-];
-
 export default function Home() {
+  const { stats, services, projects, news, testimonials } = useCMS();
+  const featuredProjects = projects.slice(0, 4);
+  const featuredNews = news.slice(0, 3);
+
   return (
     <div>
       {/* ─── HERO ────────────────────────────────────────────────────── */}
@@ -189,7 +181,7 @@ export default function Home() {
       {/* ─── STATS BAR ───────────────────────────────────────────────── */}
       <section style={{ backgroundColor: "#0C1E35" }}>
         <div className="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-white/10">
-          {STATS.map((s, i) => (
+          {stats.map((s, i) => (
             <FadeIn key={s.label} delay={i * 80}>
               <div className="lg:px-10 text-center lg:text-left">
                 <AnimatedCounter target={s.value} suffix={s.suffix} />
@@ -321,7 +313,7 @@ export default function Home() {
           </FadeIn>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SERVICES.slice(0, 6).map((s, i) => (
+            {services.slice(0, 6).map((s, i) => (
               <FadeIn key={s.id} delay={i * 60}>
                 <Link to="/services" className="group block rounded-lg overflow-hidden bg-white hover:shadow-lg transition-shadow duration-300">
                   <div className="overflow-hidden" style={{ height: "180px", backgroundColor: "#1C354F" }}>
@@ -402,8 +394,8 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 gap-5">
-            {FEATURED_PROJECTS.map((p, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {featuredProjects.map((p, i) => (
               <FadeIn key={p.id} delay={i * 80}>
                 <Link to={`/projects`} className="group block rounded-lg overflow-hidden relative" style={{ height: "300px", backgroundColor: "#132840" }}>
                   <img
@@ -548,7 +540,7 @@ export default function Home() {
             </div>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t, i) => (
+            {testimonials.map((t, i) => (
               <FadeIn key={t.id} delay={i * 100}>
                 <div className="flex flex-col h-full rounded-xl p-8 bg-white" style={{ border: "1px solid #E8EEF3", boxShadow: "0 2px 16px rgba(12,30,53,0.06)" }}>
                   <div className="text-3xl mb-5" style={{ color: "#E85C0D", fontFamily: "Georgia, serif", lineHeight: 1 }}>"</div>
@@ -615,8 +607,8 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-3 gap-6">
-            {FEATURED_NEWS.map((article, i) => (
+          <div className="grid sm:grid-cols-3 gap-8">
+            {featuredNews.map((article, i) => (
               <FadeIn key={article.id} delay={i * 80}>
                 <Link to="/news" className="group block rounded-lg overflow-hidden bg-white border hover:border-orange-500 transition-colors duration-200" style={{ borderColor: "#C8D5DF" }}>
                   <div className="overflow-hidden" style={{ height: "200px", backgroundColor: "#1C354F" }}>
