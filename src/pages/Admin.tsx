@@ -116,7 +116,7 @@ export default function Admin() {
 
   if (!authenticated) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-6 overflow-y-auto relative" style={{ backgroundColor: "#060F1C" }}>
+      <div className="min-h-[85vh] flex items-center justify-center py-16 px-6 relative overflow-hidden" style={{ backgroundColor: "#060F1C" }}>
         {/* Marine Engineering Background Image & Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
