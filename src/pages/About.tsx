@@ -15,13 +15,13 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-function PageHero({ title, subtitle, image }: { title: string; subtitle: string; image: string }) {
+function PageHero({ title, subtitle, image, altText }: { title: string; subtitle: string; image: string; altText?: string }) {
   return (
     <section
       className="relative flex items-end pb-20 pt-36 overflow-hidden"
       style={{ backgroundColor: "#0C1E35", minHeight: "480px" }}
     >
-      <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.25 }} />
+      <img src={image} alt={altText || `${title} - Tema, Ghana & West Africa Marine Operations`} className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.25 }} />
       <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0C1E35 0%, rgba(12,30,53,0.5) 100%)" }} />
       <div className="relative max-w-screen-xl mx-auto px-6 lg:px-10 w-full">
         <SectionLabel>About 3C Marine Engineering</SectionLabel>

@@ -121,7 +121,7 @@ export default function Admin() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&h=1080&fit=crop&auto=format"
-            alt="3C Marine Engineering Offshore Operations"
+            alt="3C Marine Engineering Offshore Operations - Tema Port & Gulf of Guinea, Ghana"
             className="w-full h-full object-cover opacity-35 scale-105"
             style={{ filter: "brightness(0.4) contrast(1.2)" }}
           />
