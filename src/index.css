@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700&family=Barlow:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-navy-950: #060F1C;
+  --color-navy-900: #0C1E35;
+  --color-navy-800: #132840;
+  --color-navy-700: #1C354F;
+  --color-navy-600: #254460;
+  --color-navy-500: #2E5373;
+  --color-steel-700: #3D5469;
+  --color-steel-600: #4A6070;
+  --color-steel-500: #5B6E82;
+  --color-steel-400: #7A90A4;
+  --color-steel-300: #A0B2C1;
+  --color-steel-200: #C8D5DF;
+  --color-steel-100: #E8EEF3;
+  --color-steel-50: #F4F7F9;
+  --color-orange-700: #B84500;
+  --color-orange-600: #D05000;
+  --color-orange-500: #E85C0D;
+  --color-orange-400: #F06A20;
+  --color-orange-300: #F88040;
+  --color-charcoal: #1F2E3D;
+  --font-display: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Barlow', ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Barlow', ui-sans-serif, system-ui, sans-serif;
+  background-color: #ffffff;
+  color: #0C1E35;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #5B6E82; border-radius: 2px; }
