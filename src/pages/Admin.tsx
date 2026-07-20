@@ -12,11 +12,7 @@ import {
   UploadIcon,
   GlobeIcon,
   TrendingUpIcon,
-  MapPinIcon,
-  PhoneIcon,
   ChatIcon,
-  ClockIcon,
-  ArrowRightIcon,
   AttachIcon,
   StarIcon,
   ChevronRightIcon,
@@ -47,14 +43,13 @@ export default function Admin() {
   // Forms hub state filter
   const [formSubTab, setFormSubTab] = useState<"quotes" | "contacts" | "careers" | "newsletters">("quotes");
 
-  // Editing state
+  // Active modal editing state
   const [editingProject, setEditingProject] = useState<any | null>(null);
   const [editingService, setEditingService] = useState<any | null>(null);
   const [editingNews, setEditingNews] = useState<any | null>(null);
   const [editingTeam, setEditingTeam] = useState<any | null>(null);
-  const [editingJob, setEditingJob] = useState<any | null>(null);
 
-  // Notifications
+  // Notifications & Helpers
   const [notification, setNotification] = useState<string | null>(null);
   const notify = (msg: string) => {
     setNotification(msg);
@@ -91,7 +86,7 @@ export default function Admin() {
   };
 
   // Mock Form Submissions Data for Forms Hub
-  const [submissions, setSubmissions] = useState({
+  const submissions = {
     quotes: [
       { id: "RFQ-1092", name: "Kwame Nkrumah", company: "Tullow Oil Ghana", service: "Offshore Engineering", date: "2024-11-18", status: "New", budget: "$250,000 - $1,000,000" },
       { id: "RFQ-1091", name: "David Miller", company: "Meridian Port Services", service: "Marine Civil Works", date: "2024-11-17", status: "In Review", budget: "Over $1,000,000" },
@@ -105,15 +100,15 @@ export default function Admin() {
       { id: "APP-803", applicant: "Ing. Joseph Osei", role: "Senior Marine Structural Engineer", date: "2024-11-18", status: "Under Review" },
       { id: "APP-802", applicant: "Anita Mensah", role: "Graduate Engineer (2025)", date: "2024-11-17", status: "Shortlisted" },
     ],
-  });
+  };
 
   // Mock Asset Manager Data
-  const [assets, setAssets] = useState([
+  const assets = [
     { id: "ast-1", name: "Tema_Port_Berth_Maintenance.jpg", size: "2.4 MB", type: "Image", folder: "Projects", date: "2024-11-10" },
     { id: "ast-2", name: "FPSO_Turret_Overhaul_Diagram.pdf", size: "8.1 MB", type: "Document", folder: "Technical", date: "2024-11-08" },
     { id: "ast-3", name: "ISO_9001_Certificate_2024.pdf", size: "1.2 MB", type: "Document", folder: "Certifications", date: "2024-10-25" },
     { id: "ast-4", name: "Offshore_Support_Vessel_Underwater.jpg", size: "4.7 MB", type: "Image", folder: "Services", date: "2024-10-14" },
-  ]);
+  ];
 
   if (!authenticated) {
     return (
@@ -424,7 +419,19 @@ export default function Admin() {
               <div className="p-8 rounded-2xl border shadow-sm" style={cardBgStyle}>
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="font-bold text-2xl" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Executive Leadership Team</h3>
-                  <button onClick={() => notify("Team member added!")} className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-orange-600" style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}>+ ADD EXECUTIVE</button>
+                  <button
+                    onClick={() => setEditingTeam({
+                      name: "Executive Leader Name",
+                      role: "Director of Marine Services",
+                      bio: "Executive profile biography...",
+                      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&auto=format",
+                      linkedin: "https://linkedin.com"
+                    })}
+                    className="px-4 py-2 rounded-lg text-xs font-bold text-white bg-orange-600"
+                    style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}
+                  >
+                    + ADD EXECUTIVE
+                  </button>
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {cms.team.map((t) => (
@@ -432,10 +439,53 @@ export default function Admin() {
                       <img src={t.image} alt={t.name} className="w-20 h-20 rounded-full object-cover mx-auto mb-3 border-2 border-orange-500" />
                       <div className="font-bold text-base" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{t.name}</div>
                       <div className="text-xs text-orange-600 font-semibold mb-2">{t.role}</div>
-                      <button onClick={() => notify(`Editing ${t.name}`)} className="text-xs font-semibold text-slate-500 underline">Edit Profile</button>
+                      <button onClick={() => setEditingTeam({ ...t })} className="text-xs font-semibold text-slate-500 underline">Edit Profile</button>
                     </div>
                   ))}
                 </div>
+
+                {editingTeam && (
+                  <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl max-w-xl w-full p-8 text-slate-900">
+                      <h4 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>Edit Profile: {editingTeam.name}</h4>
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">NAME</label>
+                          <input type="text" value={editingTeam.name} onChange={(e) => setEditingTeam({ ...editingTeam, name: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">ROLE / POSITION</label>
+                          <input type="text" value={editingTeam.role} onChange={(e) => setEditingTeam({ ...editingTeam, role: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">BIOGRAPHY</label>
+                          <textarea rows={4} value={editingTeam.bio} onChange={(e) => setEditingTeam({ ...editingTeam, bio: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                        <div className="flex justify-end gap-3 pt-4 border-t">
+                          <button onClick={() => setEditingTeam(null)} className="px-5 py-2.5 rounded-lg text-sm text-slate-600">Cancel</button>
+                          <button
+                            onClick={() => {
+                              const idx = cms.team.findIndex((t) => t.name === editingTeam.name);
+                              if (idx >= 0) {
+                                const updated = [...cms.team];
+                                updated[idx] = editingTeam;
+                                cms.updateTeam(updated);
+                              } else {
+                                cms.updateTeam([...cms.team, editingTeam]);
+                              }
+                              setEditingTeam(null);
+                              notify("Profile saved!");
+                            }}
+                            className="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-orange-600"
+                            style={{ backgroundColor: "#E85C0D" }}
+                          >
+                            SAVE PROFILE
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -463,10 +513,59 @@ export default function Admin() {
                         <p className="text-xs text-slate-500 max-w-xl">{s.description.slice(0, 100)}...</p>
                       </div>
                     </div>
-                    <button onClick={() => { setEditingService(s); notify(`Editing ${s.title}`); }} className="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300 hover:bg-slate-50">EDIT SERVICE</button>
+                    <button onClick={() => setEditingService({ ...s })} className="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300 hover:bg-slate-50">EDIT SERVICE</button>
                   </div>
                 ))}
               </div>
+
+              {editingService && (
+                <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 text-slate-900">
+                    <h4 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
+                      Edit Service: {editingService.title}
+                    </h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">SERVICE TITLE</label>
+                        <input
+                          type="text"
+                          value={editingService.title}
+                          onChange={(e) => setEditingService({ ...editingService, title: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-lg border text-sm"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">DESCRIPTION</label>
+                        <textarea
+                          rows={3}
+                          value={editingService.description}
+                          onChange={(e) => setEditingService({ ...editingService, description: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-lg border text-sm"
+                        />
+                      </div>
+                      <div className="flex items-center justify-end gap-3 pt-4 border-t">
+                        <button onClick={() => setEditingService(null)} className="px-5 py-2.5 rounded-lg text-sm text-slate-600">Cancel</button>
+                        <button
+                          onClick={() => {
+                            const idx = cms.services.findIndex((s) => s.id === editingService.id);
+                            if (idx >= 0) {
+                              const updated = [...cms.services];
+                              updated[idx] = editingService;
+                              cms.updateServices(updated);
+                            }
+                            setEditingService(null);
+                            notify("Service updated successfully!");
+                          }}
+                          className="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-orange-600"
+                          style={{ backgroundColor: "#E85C0D" }}
+                        >
+                          SAVE SERVICE
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -481,7 +580,21 @@ export default function Admin() {
                   <p className="text-xs text-slate-500">Add, edit, or publish engineering project case studies</p>
                 </div>
                 <button
-                  onClick={() => notify("Opening Project Creation wizard")}
+                  onClick={() => setEditingProject({
+                    id: `prj-${Date.now()}`,
+                    title: "New Engineering Project",
+                    client: "Client Corporation",
+                    location: "Tema, Ghana",
+                    duration: "12 months",
+                    year: "2024",
+                    category: "Offshore",
+                    scope: "Detailed project scope description...",
+                    challenge: "Technical challenges overcome...",
+                    solution: "Engineering solutions deployed...",
+                    results: "Project outcome metrics...",
+                    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=500&fit=crop&auto=format",
+                    gallery: ["https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=700&h=450&fit=crop&auto=format"]
+                  })}
                   className="px-4 py-2.5 rounded-lg text-xs font-bold text-white"
                   style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}
                 >
@@ -502,11 +615,62 @@ export default function Admin() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => notify(`Editing ${p.title}`)} className="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300">EDIT</button>
+                      <button onClick={() => setEditingProject({ ...p })} className="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300">EDIT</button>
                     </div>
                   </div>
                 ))}
               </div>
+
+              {editingProject && (
+                <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 text-slate-900">
+                    <h4 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>
+                      Edit Project: {editingProject.title}
+                    </h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">PROJECT TITLE</label>
+                        <input type="text" value={editingProject.title} onChange={(e) => setEditingProject({ ...editingProject, title: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">CLIENT</label>
+                          <input type="text" value={editingProject.client} onChange={(e) => setEditingProject({ ...editingProject, client: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-600 mb-1">LOCATION</label>
+                          <input type="text" value={editingProject.location} onChange={(e) => setEditingProject({ ...editingProject, location: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">SCOPE</label>
+                        <textarea rows={3} value={editingProject.scope} onChange={(e) => setEditingProject({ ...editingProject, scope: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div className="flex justify-end gap-3 pt-4 border-t">
+                        <button onClick={() => setEditingProject(null)} className="px-5 py-2.5 rounded-lg text-sm text-slate-600">Cancel</button>
+                        <button
+                          onClick={() => {
+                            const idx = cms.projects.findIndex((p) => p.id === editingProject.id);
+                            if (idx >= 0) {
+                              const updated = [...cms.projects];
+                              updated[idx] = editingProject;
+                              cms.updateProjects(updated);
+                            } else {
+                              cms.updateProjects([editingProject, ...cms.projects]);
+                            }
+                            setEditingProject(null);
+                            notify("Project saved successfully!");
+                          }}
+                          className="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-orange-600"
+                          style={{ backgroundColor: "#E85C0D" }}
+                        >
+                          SAVE PROJECT
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -517,7 +681,21 @@ export default function Admin() {
             <div className="p-8 rounded-2xl border shadow-sm" style={cardBgStyle}>
               <div className="flex justify-between items-center mb-6">
                 <h3 className="font-bold text-2xl" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>Newsroom & Insights</h3>
-                <button onClick={() => notify("New article draft created")} className="px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-orange-600" style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}>+ NEW ARTICLE</button>
+                <button
+                  onClick={() => setEditingNews({
+                    id: Date.now(),
+                    title: "New Corporate Announcement",
+                    category: "Company News",
+                    date: new Date().toISOString().split("T")[0],
+                    excerpt: "Announcement summary text...",
+                    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=450&fit=crop&auto=format",
+                    readTime: "3 min read"
+                  })}
+                  className="px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-orange-600"
+                  style={{ backgroundColor: "#E85C0D", fontFamily: "'Barlow Condensed', sans-serif" }}
+                >
+                  + NEW ARTICLE
+                </button>
               </div>
 
               <div className="grid gap-4">
@@ -531,10 +709,49 @@ export default function Admin() {
                         <h4 className="font-bold text-lg" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>{n.title}</h4>
                       </div>
                     </div>
-                    <button onClick={() => notify(`Editing article ${n.title}`)} className="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300">EDIT</button>
+                    <button onClick={() => setEditingNews({ ...n })} className="px-4 py-2 rounded-lg text-xs font-bold border border-slate-300">EDIT</button>
                   </div>
                 ))}
               </div>
+
+              {editingNews && (
+                <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-2xl max-w-2xl w-full p-8 text-slate-900">
+                    <h4 className="text-2xl font-bold mb-6" style={{ fontFamily: "'Barlow Condensed', sans-serif", color: "#0C1E35" }}>Edit News Article</h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">ARTICLE TITLE</label>
+                        <input type="text" value={editingNews.title} onChange={(e) => setEditingNews({ ...editingNews, title: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-1">EXCERPT / BODY</label>
+                        <textarea rows={3} value={editingNews.excerpt} onChange={(e) => setEditingNews({ ...editingNews, excerpt: e.target.value })} className="w-full px-4 py-2.5 rounded-lg border text-sm" />
+                      </div>
+                      <div className="flex justify-end gap-3 pt-4 border-t">
+                        <button onClick={() => setEditingNews(null)} className="px-5 py-2.5 rounded-lg text-sm text-slate-600">Cancel</button>
+                        <button
+                          onClick={() => {
+                            const idx = cms.news.findIndex((item) => item.id === editingNews.id);
+                            if (idx >= 0) {
+                              const updated = [...cms.news];
+                              updated[idx] = editingNews;
+                              cms.updateNews(updated);
+                            } else {
+                              cms.updateNews([editingNews, ...cms.news]);
+                            }
+                            setEditingNews(null);
+                            notify("Article saved!");
+                          }}
+                          className="px-6 py-2.5 rounded-lg text-sm font-bold text-white bg-orange-600"
+                          style={{ backgroundColor: "#E85C0D" }}
+                        >
+                          SAVE ARTICLE
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
